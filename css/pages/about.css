@@ -1,0 +1,182 @@
+/* About page — section shells only; components live in components.css.
+   Backgrounds: sankara (bg) → philosophy (brand teal) → resort (bg, .split-deck)
+   → cta (photo band). */
+
+/* ---------- Hero ----------
+   Wide bay photo: portrait screens keep the left cliff, not open water. */
+.about-hero .page-hero__media img {
+  object-position: 22% center;
+}
+
+/* ---------- Sankara (the name) ---------- */
+.about-story {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+}
+
+/* Two text/photo rows; the second flips sides from 1024px. Phones and
+   tablets stack copy above its photo in both rows. */
+.about-name__head {
+  max-width: var(--measure-md);
+}
+
+.about-name__row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+  align-items: center;
+}
+
+.about-name__row + .about-name__row {
+  margin-top: var(--space-16);
+}
+
+.about-name__copy .story__text + .story__text {
+  margin-top: var(--space-4);
+}
+
+.about-name__figure {
+  aspect-ratio: 4 / 3;
+}
+
+/* Portrait source: keep the praying figure in shot. Crop only; size and
+   parallax stay with components.css Scroll parallax. */
+.about-name__figure--prayer img {
+  object-position: 50% 35%;
+}
+
+@media (min-width: 1024px) {
+  .about-name__row {
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: var(--space-8);
+  }
+
+  .about-name__row + .about-name__row {
+    margin-top: var(--space-24);
+  }
+
+  .about-name__copy {
+    grid-column: 1 / span 5;
+  }
+
+  .about-name__figure {
+    grid-column: 7 / -1;
+    aspect-ratio: 3 / 2;
+  }
+
+  .about-name__row--flip .about-name__copy {
+    grid-column: 8 / -1;
+  }
+
+  .about-name__row--flip .about-name__figure {
+    grid-row: 1;
+    grid-column: 1 / span 6;
+  }
+}
+
+/* Closing line under a section's copy (Sankara, resort). */
+.about-closing {
+  margin-top: var(--space-10);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-line);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--text-body-lg);
+  line-height: 1.5;
+  text-wrap: balance;
+  color: var(--color-highlight-text);
+}
+
+/* ---------- Philosophy ----------
+   Teal surface and head colours from components.css .band-brand; value
+   lines use sand-200 (5.8:1), the statement accent sand-300 (3.9:1, 24px
+   large text only). */
+.about-philosophy {
+  padding-block: var(--space-24);
+}
+
+/* Calm / Connection / Peace: the client's cream line icons over each name;
+   stacked on phones, three columns split by hairlines from 768px. */
+.about-values {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin: var(--space-16) 0 0;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+}
+
+.about-values__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding-block: var(--space-8);
+}
+
+.about-values__item + .about-values__item {
+  border-top: 1px solid rgb(255 253 241 / 20%);
+}
+
+.about-values__icon {
+  display: block;
+  width: auto;
+  height: clamp(3.5rem, 3.8889vw, 6.2222rem); /* 56px */
+  margin-bottom: var(--space-4);
+}
+
+.about-values__name {
+  font-size: var(--text-label);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--sand-50);
+}
+
+.about-values__line {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--text-h4);
+  line-height: var(--line-tight);
+  color: var(--sand-200);
+}
+
+.about-statement {
+  max-width: var(--measure-md);
+  margin: var(--space-16) auto 0;
+  font-family: var(--font-serif);
+  font-size: var(--text-h4);
+  line-height: 1.4;
+  text-align: center;
+  text-wrap: balance;
+  color: var(--sand-50);
+}
+
+.about-statement strong {
+  font-weight: 400;
+}
+
+.about-statement em {
+  color: var(--sand-300);
+}
+
+@media (min-width: 768px) {
+  .about-values {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .about-values__item {
+    padding: var(--space-4) var(--space-8);
+  }
+
+  .about-values__item + .about-values__item {
+    border-top: 0;
+    border-left: 1px solid rgb(255 253 241 / 20%);
+  }
+}
+
+/* ---------- Resort ----------
+   Layout is the shared .split-deck; the kicker sits above the title. */
+.about-resort .section-head__kicker {
+  margin-bottom: var(--space-4);
+}

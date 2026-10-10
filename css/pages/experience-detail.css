@@ -1,0 +1,84 @@
+/* Experience detail template (experience-<slug>.html / single-experience.php) — section shells only.
+   The concierge CTA band and the 3-line card clamp come from experiences.css. */
+
+/* ---------- Overview split ---------- */
+.experience-overview {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+}
+
+.experience-overview__lead {
+  max-width: var(--measure-md);
+  margin-bottom: var(--space-8);
+  font-size: var(--text-h4);
+  line-height: 1.4;
+  color: var(--color-ink);
+}
+
+.experience-overview__body .chapter__text {
+  max-width: var(--measure-md);
+}
+
+@media (min-width: 1024px) {
+  .experience-overview__body {
+    grid-column: span 7;
+  }
+}
+
+/* Panel label is an h2 for the aside's name; keep the caps-label look. */
+.detail__panel .room__details-label {
+  margin-bottom: 0;
+  font-family: var(--font-sans);
+  line-height: 1.4;
+}
+
+/* Facts in the narrow panel: label left, value and note right. */
+.experience-facts .hours__row dt {
+  flex: 0 0 auto;
+}
+
+.experience-facts .hours__row dd {
+  flex: 1 1 10rem;
+}
+
+.experience-facts__note {
+  margin: 0;
+  font-size: var(--text-caption);
+  line-height: 1.6;
+  color: var(--color-soft);
+}
+
+/* ---------- Gallery ----------
+   Same mosaic as the room gallery: 2x2 lead on the left pair, singles stacked
+   right; the last tile stretches to close a short final row. */
+.experience-gallery {
+  padding-block: var(--space-24);
+  background: var(--color-surface);
+}
+
+/* Phones: the lead fills the first row, singles pair up after it. */
+@media (max-width: 767px) {
+  .experience-gallery .gallery__item:nth-child(even):last-child {
+    grid-column: span 2;
+  }
+}
+
+@media (min-width: 768px) {
+  .experience-gallery .gallery__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .experience-gallery .gallery__item:nth-child(3n + 1):last-child {
+    grid-column: 1 / -1;
+  }
+
+  .experience-gallery .gallery__item:nth-child(3n + 2):last-child {
+    grid-column: span 2;
+  }
+}
+
+/* ---------- Other experiences ---------- */
+.experience-others {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+}

@@ -1,0 +1,21 @@
+/* Accommodation listing — section shells only; components live in components.css. */
+
+/* ---------- Room listing ---------- */
+.rooms-list {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+}
+
+.rooms-list .section-head__text {
+  max-width: var(--measure-lg);
+}
+
+/* Room chapters are tall image/text splits; the default section-head and
+   chapter rhythm reads cramped here, so the listing gets extra air. */
+.rooms-list .section-head {
+  margin-bottom: var(--space-24);
+}
+
+.rooms-list .chapter + .chapter {
+  margin-top: calc(var(--space-24) * 1.5);
+}

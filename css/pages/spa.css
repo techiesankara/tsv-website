@@ -1,0 +1,130 @@
+/* Spa page — section shells only; components live in components.css. */
+
+/* ---------- Overview ---------- */
+.spa-intro {
+  padding-block: var(--space-24);
+  background: var(--color-surface);
+}
+
+/* Layout and type are the shared .venue-intro (components.css). */
+
+/* ---------- Treatments ----------
+   Layout is the shared .split-deck (components.css), as dining #sukha; only
+   the button spacing and the crop are page-specific. */
+.spa-treatments__button {
+  margin-top: var(--space-10);
+}
+
+/* Keep the petal bath in frame when the tall panel crops the photo narrow. */
+.spa-treatments .split-deck__media img {
+  object-position: 30% center;
+}
+
+/* ---------- Packages ---------- */
+.spa-packages {
+  padding-block: var(--space-24);
+  background: var(--color-surface);
+  scroll-margin-top: var(--space-16);
+}
+
+/* One wide photo between the sample note and the journeys. */
+.spa-packages__figure {
+  margin: var(--space-6) 0 var(--space-12);
+  aspect-ratio: 3 / 2;
+}
+
+.spa-packages__figure img {
+  object-position: 50% 35%;
+}
+
+@media (min-width: 768px) {
+  .spa-packages__figure {
+    aspect-ratio: 16 / 7;
+  }
+}
+
+/* Journeys are text panels, not photo cards: no spa photo exists yet, and two
+   identical cards would repeat the treatment list's shape one section later. */
+.journeys {
+  display: grid;
+  gap: var(--space-10) var(--space-12);
+}
+
+.journey {
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-line);
+}
+
+.journey__kicker {
+  display: block;
+  margin-bottom: var(--space-3);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--color-soft);
+}
+
+.journey__title {
+  margin: 0 0 var(--space-3);
+  font-size: var(--text-h4);
+  font-weight: 300;
+  line-height: var(--line-tight);
+}
+
+.journey__text {
+  max-width: var(--measure-md);
+  margin: 0;
+  font-size: var(--text-body-sm);
+  line-height: var(--line-body);
+  color: var(--color-muted);
+}
+
+.journey__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-8);
+  margin: var(--space-5) 0 0;
+}
+
+.journey__meta div {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+}
+
+.journey__meta dt {
+  font-size: var(--text-caption);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--color-soft);
+}
+
+.journey__meta dd {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: var(--text-body-sm);
+  color: var(--color-ink);
+}
+
+@media (min-width: 768px) {
+  .journeys {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.spa-packages .empty-state {
+  margin-top: var(--space-6);
+}
+
+/* ---------- Gallery ---------- */
+/* Background alternates with Packages (surface) above it. */
+.spa-gallery {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+}
+
+.spa-gallery .empty-state {
+  margin-top: var(--space-6);
+}

@@ -1,0 +1,171 @@
+/* Contact page: section shells only; components live in components.css. */
+
+/* ---------- Inquiry: intro 5 / form 7 ---------- */
+.contact {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+}
+
+.contact__grid {
+  align-items: start;
+}
+
+.contact__intro .section-head {
+  margin-bottom: var(--space-6);
+}
+
+.contact__intro .section-head__text a {
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-decoration-color: var(--color-highlight);
+  text-underline-offset: 0.2em;
+  transition: color 0.3s;
+}
+
+.contact__intro .section-head__text a:hover {
+  color: var(--color-highlight-text);
+}
+
+.contact__intro-note {
+  max-width: var(--measure-sm);
+  font-size: var(--text-body-sm);
+  color: var(--color-soft);
+}
+
+/* The intro stays beside the form while the long form scrolls past. */
+@media (min-width: 1024px) {
+  .contact__intro {
+    position: sticky;
+    top: calc(var(--space-24) + var(--space-8));
+  }
+}
+
+/* Form panel: white card, same padding rhythm as .room__panel. */
+.contact__panel {
+  min-width: 0;
+  padding: var(--space-8);
+  background: var(--color-card);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+}
+
+@media (min-width: 768px) {
+  .contact__panel {
+    padding: var(--space-12);
+  }
+}
+
+.contact__form .form__actions .form__hint {
+  max-width: var(--measure-sm);
+}
+
+/* ---------- Google Maps, full bleed ----------
+   Below 1024px the card follows the map on the surface colour; from 1024px
+   the map fills the band and the card floats over its left edge. The
+   overlay lets clicks through to the map everywhere except the card. */
+.contact-map {
+  position: relative;
+  background: var(--color-surface);
+}
+
+.contact-map__frame {
+  min-height: var(--media-h-md);
+  border: 0;
+  border-radius: 0;
+}
+
+.contact-map__overlay {
+  padding-block: var(--space-16);
+}
+
+.contact-map__card .section-head {
+  margin-bottom: var(--space-6);
+}
+
+.contact-map__address {
+  margin-bottom: var(--space-8);
+  font-style: normal;
+  font-family: var(--font-serif);
+  font-size: var(--text-body-lg);
+  line-height: var(--line-snug);
+  color: var(--color-ink);
+}
+
+@media (min-width: 1024px) {
+  .contact-map__frame {
+    min-height: 0;
+    height: clamp(40rem, 44.4444vw, 71.1111rem); /* 640px */
+  }
+
+  .contact-map__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    z-index: 2; /* above the iframe (z-index 1 in .locate__map) */
+    padding-block: 0;
+    pointer-events: none; /* auto margins from .container centre it */
+  }
+
+  .contact-map__card {
+    max-width: calc(var(--measure-sm) - var(--space-16));
+    padding: var(--space-12);
+    background: var(--color-card);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    pointer-events: auto;
+  }
+
+  /* Blocked embed: keep the fallback clear of the card. */
+  .contact-map .locate__map-fallback {
+    padding-left: calc(50% + var(--space-12));
+  }
+
+  .contact-map__card .section-head__title {
+    font-size: var(--text-h3);
+  }
+}
+
+/* ---------- Directions: photo 7 / copy 5 ---------- */
+.directions {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+}
+
+.directions__grid {
+  align-items: stretch;
+}
+
+/* Frame crops the parallax photo (components.css Scroll parallax). */
+.directions__media {
+  margin: 0;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-sm);
+  overflow: hidden; /* fallback for browsers without overflow: clip */
+  overflow: clip;
+}
+
+.directions__body {
+  min-width: 0;
+}
+
+.directions .section-head__title {
+  text-wrap: balance;
+}
+
+.directions__subtitle {
+  margin-bottom: var(--space-4);
+  font-family: var(--font-sans);
+  font-size: var(--text-label);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--color-soft);
+}
+
+@media (min-width: 1024px) {
+  .directions__media {
+    aspect-ratio: auto;
+    min-height: var(--media-h-lg);
+  }
+}

@@ -1,0 +1,562 @@
+.welcome__map-column {
+  min-width: 0;
+}
+
+.highlights__head {
+  text-align: center;
+}
+
+.chapter__body--center {
+  text-align: center;
+}
+
+@media (min-width: 1024px) {
+  .chapter__body--center {
+    text-align: left;
+  }
+}
+
+.faq__layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-20);
+}
+
+@media (min-width: 1024px) {
+  .faq__layout {
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+  /* Wide enough for the five category chips to sit on one line. */
+  .faq__column {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 1280px) {
+  .faq__column {
+    grid-column: 2 / span 10;
+  }
+}
+
+.faq__title {
+  margin-bottom: var(--space-8);
+  padding-inline: 0;
+  font-size: var(--text-h2);
+  text-align: left;
+}
+
+/* ============================================================================
+   Phase 2 home (home.html) — section shells for the PRD sections that were
+   not on the phase-1 single page: offers, experiences, gallery. Backgrounds
+   alternate: amenities (surface) → offers (bg) → experiences (surface) →
+   gallery (bg) → faq (surface via modifier).
+   ========================================================================= */
+.offers,
+.gallery {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+}
+
+.experiences {
+  padding-block: var(--space-24);
+  background: var(--color-surface);
+}
+
+.faq--surface {
+  background: var(--color-surface);
+}
+
+/* Phase-2 welcome links out to about.html. */
+.welcome__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-8);
+}
+
+/* ============================================================================
+   Phase 2 home (home.html) — section shells for the PRD sections that were
+   not on the phase-1 single page: offers, experiences, gallery. Backgrounds
+   alternate: amenities (surface) → offers (bg) → experiences (surface) →
+   gallery (bg) → faq (surface via modifier).
+   ========================================================================= */
+.offers,
+.gallery {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+}
+
+.experiences {
+  padding-block: var(--space-24);
+  background: var(--color-surface);
+}
+
+.faq--surface {
+  background: var(--color-surface);
+}
+
+/* Phase-2 welcome links out to about.html. */
+.welcome__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-8);
+}
+
+/* ============================================================================
+   index.html restructure — background modifiers so the page
+   keeps a bg/surface/bg/surface rhythm across Welcome, Accommodation,
+   Dining & Wellness, Facilities, Experiences, Offers and Getting Here.
+   Welcome/Facilities already default right; the rest get a page-only
+   modifier so home.html's own (different) order is untouched.
+   ========================================================================= */
+.rooms--alt {
+  background: var(--color-surface);
+}
+
+.highlights--alt {
+  background: var(--color-bg);
+}
+
+.experiences--alt {
+  background: var(--color-bg);
+}
+
+.offers--alt {
+  background: var(--color-surface);
+}
+
+/* .getting-here (index.html, home.html and about.html #getting-here) moved to
+   components.css: about.html needs it too and has no page css of its own for
+   this section. */
+
+/* ---------- Dining & Wellness venues ----------
+   Split layout borrowed from dining.html's Sukha deck. Base styles are the
+   static stack (phone, reduced motion, no JS); .is-pinned is added by main.js
+   and turns the stage into one sticky screen the three venues play through. */
+.venues {
+  background: var(--color-bg);
+  color: var(--color-ink);
+}
+
+.venues__media {
+  height: 60svh;
+  min-height: 20rem;
+  overflow: hidden;
+}
+
+.venues__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(calc(1.12 - 0.12 * var(--r, 1)));
+  transform-origin: center bottom;
+}
+
+.venues__body {
+  padding: var(--space-12) var(--gutter) var(--space-20);
+}
+
+.venues__title {
+  font-size: var(--text-h3);
+  line-height: var(--line-tight);
+  color: var(--color-ink);
+}
+
+.venues__tagline {
+  margin-top: var(--space-3);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--text-body-lg);
+  color: var(--color-highlight-text);
+}
+
+.venues__text {
+  max-width: 34rem;
+  margin-top: var(--space-6);
+  font-size: var(--text-body-sm);
+  line-height: var(--line-body);
+  color: var(--color-muted);
+}
+
+.venues__hours {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-6);
+  padding: 0;
+  list-style: none;
+  font-size: var(--text-body-sm);
+  color: var(--color-muted);
+}
+
+.venues__hours li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.venues__hours svg {
+  flex-shrink: 0;
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+  color: var(--color-highlight-text);
+}
+
+.venues__actions {
+  margin-top: var(--space-8);
+}
+
+.venues__progress {
+  display: none;
+}
+
+/* Static split rows on desktop: the Sukha deck layout, once per venue. */
+@media (min-width: 1024px) {
+  .venues:not(.is-pinned) .venues__item {
+    display: grid;
+    grid-template-columns: 9fr 11fr;
+    min-height: 100svh;
+  }
+
+  .venues:not(.is-pinned) .venues__media {
+    position: sticky;
+    top: 0;
+    order: 1;
+    align-self: start;
+    height: 100svh;
+    min-height: 0;
+  }
+
+  .venues:not(.is-pinned) .venues__body {
+    align-self: center;
+    padding: var(--space-24);
+  }
+}
+
+/* ---------- Pinned mode ----------
+   The section is one screen tall per venue; the stage sticks for the whole
+   run, so each extra screen of scroll plays one photo wipe. Every body and
+   every photo share one grid cell and stack; main.js drives the photo clips
+   and marks the visible body .is-active. */
+.venues.is-pinned {
+  height: calc(var(--venues-count, 3) * 100svh);
+}
+
+.venues.is-pinned .venues__stage {
+  position: sticky;
+  top: 0;
+  display: grid;
+  grid-template-columns: 9fr 11fr;
+  grid-template-rows: auto 1fr auto;
+  height: 100svh;
+  overflow: hidden;
+}
+
+.venues.is-pinned .venues__item {
+  display: contents;
+}
+
+.venues.is-pinned .venues__media {
+  grid-column: 2;
+  grid-row: 1 / -1;
+  height: 100%;
+  min-height: 0;
+}
+
+.venues.is-pinned .venues__body {
+  grid-column: 1;
+  grid-row: 2;
+  align-self: center;
+  padding: var(--space-12) var(--space-24);
+}
+
+/* Out: quick fade. In: slower rise, delayed so the two never overlap. */
+.venues.is-pinned .venues__body[data-reveal] {
+  opacity: 0;
+  transform: translateY(var(--space-6));
+  pointer-events: none;
+  transition: opacity 300ms var(--ease-out), transform 300ms var(--ease-out);
+}
+
+.venues.is-pinned .venues__body[data-reveal].is-active {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+  transition: opacity 700ms var(--ease-out) 200ms, transform 700ms var(--ease-out) 200ms;
+}
+
+.venues.is-pinned .venues__progress {
+  grid-column: 1;
+  grid-row: 3;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: 0 var(--space-24) var(--space-16);
+  font-size: var(--text-caption);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: var(--tracking-caps);
+  color: var(--color-muted);
+}
+
+.venues__bar {
+  position: relative;
+  width: clamp(6rem, 6.6667vw, 10.6667rem);
+  height: 1px;
+  background: var(--color-line);
+}
+
+.venues__bar > span {
+  position: absolute;
+  inset: 0;
+  background: var(--color-highlight);
+  transform: scaleX(var(--p, 0));
+  transform-origin: left;
+}
+
+/* Narrow laptops: 90px a side squeezes the 45% panel; drop to 48px. */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .venues:not(.is-pinned) .venues__body,
+  .venues.is-pinned .venues__body {
+    padding-inline: var(--space-16);
+  }
+
+  .venues.is-pinned .venues__progress {
+    padding-inline: var(--space-16);
+  }
+}
+
+/* ---------- Promo pop-up ----------
+   Modal <dialog> opened by main.js a few seconds after the home page loads,
+   once per session. Holds one 1:1 promo artwork (copy and button are part of
+   the image), sized to fit the viewport either way. Centred (a modal is not
+   anchored to a trigger), enters and leaves with a short fade + lift; the
+   backdrop fades with it. */
+.promo {
+  width: min(100% - 2 * var(--gutter), 100dvh - 2 * var(--gutter), 34rem);
+  max-width: none;
+  max-height: none;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--color-bg);
+  box-shadow: 0 24px 64px color-mix(in srgb, var(--color-ink) 30%, transparent);
+  opacity: 0;
+  transform: translateY(12px) scale(0.97);
+  transition:
+    opacity 250ms var(--ease-out),
+    transform 250ms var(--ease-out),
+    overlay 250ms var(--ease-out) allow-discrete,
+    display 250ms var(--ease-out) allow-discrete;
+}
+
+.promo[open] {
+  opacity: 1;
+  transform: none;
+}
+
+@starting-style {
+  .promo[open] {
+    opacity: 0;
+    transform: translateY(12px) scale(0.97);
+  }
+}
+
+.promo::backdrop {
+  background: color-mix(in srgb, var(--color-ink) 0%, transparent);
+  transition:
+    background-color 250ms var(--ease-out),
+    overlay 250ms var(--ease-out) allow-discrete,
+    display 250ms var(--ease-out) allow-discrete;
+}
+
+.promo[open]::backdrop {
+  background: color-mix(in srgb, var(--color-ink) 60%, transparent);
+}
+
+@starting-style {
+  .promo[open]::backdrop {
+    background: color-mix(in srgb, var(--color-ink) 0%, transparent);
+  }
+}
+
+/* Page behind the modal must not scroll. */
+body:has(.promo[open]) {
+  overflow: hidden;
+}
+
+.promo__close {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: var(--control-min);
+  height: var(--control-min);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--color-bg) 92%, transparent);
+  color: var(--color-ink);
+  transition: background-color 0.3s;
+}
+
+.promo__close:hover {
+  background: var(--color-bg);
+}
+
+.promo__close svg {
+  width: var(--icon-md);
+  height: var(--icon-md);
+}
+
+.promo__media {
+  display: block;
+  aspect-ratio: 1;
+}
+
+.promo__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* The artwork is the link; the focus ring sits inside the rounded frame. */
+.promo__media:focus-visible {
+  outline-offset: -4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .promo,
+  .promo[open] {
+    transform: none;
+  }
+
+  @starting-style {
+    .promo[open] {
+      transform: none;
+    }
+  }
+}
+
+/* ============================================================================
+   Video hero (home.html .hero--video). Full-bleed muted loop, copy anchored
+   bottom-left on a floor gradient so the footage stays clear above it.
+   ========================================================================= */
+.hero--video {
+  align-items: flex-end;
+  padding-top: 0;
+}
+
+.hero--video .hero__video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: hero-zoom 1.8s var(--ease-out) both;
+}
+
+/* Light veil for the header, deep floor for the copy. */
+.hero--video .hero__scrim {
+  background:
+    linear-gradient(to bottom, rgb(20 22 20 / 45%) 0%, rgb(20 22 20 / 0%) 22%),
+    linear-gradient(to top, rgb(20 22 20 / 78%) 0%, rgb(20 22 20 / 30%) 45%, rgb(20 22 20 / 0%) 70%);
+}
+
+/* Copy bottom-left, buttons bottom-right from 1024px; stacked below. The bottom
+   padding keeps the buttons clear of the WhatsApp float at gutter/gutter. */
+.hero--video .hero__content {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-10);
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding-block: 0 calc(var(--gutter) + var(--control-min) + var(--space-8));
+  text-align: left;
+}
+
+@media (min-width: 1024px) {
+  .hero--video .hero__content {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-12);
+  }
+}
+
+.hero__copy {
+  max-width: var(--measure-md);
+}
+
+.hero--video .hero__kicker {
+  display: block;
+  margin-bottom: var(--space-4);
+}
+
+.hero--video .hero__title {
+  margin-bottom: var(--space-4);
+  font-size: clamp(2.5rem, 4.4444vw, 7.1111rem); /* 64px */
+  line-height: 1.05;
+  text-wrap: balance;
+}
+
+.hero__lead {
+  max-width: 34ch;
+  font-size: var(--text-body-lg);
+  line-height: var(--line-body);
+  color: rgb(255 255 255 / 85%);
+  text-wrap: pretty;
+}
+
+.hero--video .hero__actions {
+  flex-shrink: 0;
+  justify-content: flex-end;
+  width: auto;
+}
+
+@media (max-width: 639px) {
+  .hero--video .hero__actions {
+    width: 100%;
+  }
+}
+
+/* Pause control (WCAG 2.2.2): shown by main.js only once the video plays.
+   Top-right under the header; the bottom-right corner holds the buttons and the float. */
+.hero__toggle {
+  position: absolute;
+  top: calc(var(--space-24) + var(--space-8));
+  right: var(--gutter);
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  width: var(--control-min);
+  height: var(--control-min);
+  border: 1px solid rgb(255 255 255 / 45%);
+  border-radius: 999px;
+  color: var(--color-inverse);
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.hero__toggle[hidden] {
+  display: none;
+}
+
+.hero__toggle:hover {
+  background: rgb(255 255 255 / 12%);
+  border-color: var(--color-inverse);
+}
+
+.hero__toggle svg {
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+}
+
+.hero__toggle-play,
+.hero__toggle[aria-pressed="true"] .hero__toggle-pause {
+  display: none;
+}
+
+.hero__toggle[aria-pressed="true"] .hero__toggle-play {
+  display: block;
+}

@@ -1,0 +1,5977 @@
+/* ---------- Component guide ---------- */
+.guide {
+  max-width: var(--layout-content-max);
+  margin: 0 auto;
+  padding: var(--space-12) var(--space-6);
+}
+
+.guide__header {
+  margin-bottom: var(--space-12);
+}
+
+.guide__section {
+  padding-block: var(--space-12);
+  border-top: 1px solid var(--color-line);
+}
+
+.guide__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(clamp(13.75rem, 15.2778vw, 24.4444rem), 1fr)); /* 220px */
+  gap: var(--space-6);
+}
+
+.guide__swatch {
+  min-height: clamp(6.875rem, 7.6389vw, 12.2222rem); /* 110px */
+  padding: var(--space-4);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+}
+
+.guide__swatch--bg { background: var(--color-bg); }
+.guide__swatch--surface { background: var(--color-surface); }
+.guide__swatch--ink { background: var(--color-ink); color: var(--color-bg); }
+.guide__swatch--accent { background: var(--color-accent); color: var(--color-bg); }
+.guide__swatch--highlight { background: var(--color-highlight); color: var(--color-ink); }
+.guide__swatch--line { background: var(--color-line); }
+
+.guide__scale-title {
+  margin-top: var(--space-10);
+  font-size: var(--text-h4);
+}
+
+.guide__scale {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(5.5rem, 1fr));
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+  padding: 0;
+  list-style: none;
+}
+
+.guide__chip {
+  display: block;
+  height: clamp(3.5rem, 3.8889vw, 6.2222rem); /* 56px */
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+}
+
+.guide__step .guide__label {
+  margin-top: var(--space-2);
+}
+
+.guide__label {
+  display: block;
+  margin-top: var(--space-4);
+  font-size: var(--text-label);
+  font-weight: 600;
+}
+
+.guide__sample {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+}
+
+.guide__stack > * + * { margin-top: var(--space-4); }
+.guide__note { margin-top: var(--space-6); color: var(--color-muted); font-size: var(--text-body-sm); }
+.guide__qa { padding-left: var(--space-6); list-style: disc; }
+.guide__qa li + li { margin-top: var(--space-2); }
+
+/* ---------- Structural objects ---------- */
+.container {
+  width: 100%;
+  max-width: var(--content-width);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.grid-12 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-16);
+}
+
+@media (min-width: 1024px) {
+  .grid-12 {
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+  .grid-12 > .col-7 {
+    grid-column: span 7;
+  }
+
+  .grid-12 > .col-5 {
+    grid-column: span 5;
+  }
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mt-4 {
+  margin-top: var(--space-4);
+}
+
+.mt-8 {
+  margin-top: var(--space-8);
+}
+
+.mt-16 {
+  margin-top: var(--space-16);
+}
+
+/* ---------- Section header (kicker + title + rule) ---------- */
+.section-head {
+  margin-bottom: var(--space-12);
+}
+
+.section-head__kicker {
+  display: block;
+  margin-bottom: var(--space-3);
+  font-size: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-weight: 500;
+  color: var(--color-highlight-text);
+}
+
+.section-head__title {
+  font-size: var(--text-h2);
+  color: var(--color-ink);
+}
+
+.section-head__text {
+  max-width: var(--measure-md);
+  margin-top: var(--space-4);
+  color: var(--color-muted);
+  line-height: 1.6;
+}
+
+.section-head__rule {
+  width: clamp(6rem, 6.6667vw, 10.6667rem); /* 96px */
+  height: 1px;
+  margin-top: var(--space-6);
+  background: var(--color-highlight);
+}
+
+.section-head__rule--center {
+  margin-inline: auto;
+}
+
+/* Centred head: kicker, title and text on one axis, text measure centred too. */
+.section-head--center {
+  text-align: center;
+}
+
+.section-head--center .section-head__text {
+  margin-inline: auto;
+}
+
+/* ---------- Buttons ---------- */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--control-min);
+  padding: var(--space-3) var(--space-6);
+  border: 1px solid transparent;
+  /* Every button is a pill; --pill now only changes size. */
+  border-radius: 999px;
+  font-size: var(--text-body-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s, transform 120ms var(--ease-out);
+}
+
+.button:active {
+  transform: scale(0.97);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button:active {
+    transform: none;
+  }
+}
+
+/* Four variants, picked by role and by the surface behind the button:
+     light surface  -> .button--primary (main action) + .button--outline (secondary)
+     photo / dark   -> .button--sand    (main action) + .button--ghost   (secondary)
+   A single-destination text link inside a card is .card__link, not a button.
+   Icons: channel icon leading (WhatsApp, email, Instagram, Facebook, copy link);
+   arrow-up-right trailing for third-party pages (Google Maps, TripAdvisor);
+   no icon on booking, form submit or internal navigation.
+   WhatsApp CTAs are always solid (primary on light, sand on photo/dark),
+   never outline or ghost; only the article share row keeps outline. */
+.button--primary {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-inverse);
+}
+
+.button--primary:hover {
+  background: var(--color-accent-dark);
+  border-color: var(--color-accent-dark);
+}
+
+.button--outline {
+  background: transparent;
+  border-color: var(--color-line);
+  color: var(--color-ink);
+}
+
+.button--outline:hover {
+  background: var(--color-bg);
+  border-color: var(--color-ink);
+}
+
+.button--sand {
+  background: var(--color-sand-button);
+  border-color: var(--color-sand-button);
+  /* Ink, not white: white on sand is 2:1, ink is 7:1 (5.8:1 on hover). */
+  color: var(--color-ink);
+}
+
+.button--sand:hover {
+  background: var(--color-sand-button-hover);
+  border-color: var(--color-sand-button-hover);
+}
+
+.button--pill {
+  padding: var(--space-2) var(--space-5);
+  min-height: var(--control-min);
+}
+
+/* ---------- Header ---------- */
+.header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  padding-block: var(--space-6);
+  background: linear-gradient(to bottom, color-mix(in srgb, var(--color-ink) 70%, transparent), transparent);
+  transition: background-color 0.25s ease, padding-block 0.25s ease, backdrop-filter 0.25s ease;
+}
+
+.header.is-scrolled {
+  padding-block: var(--space-4);
+  background: color-mix(in srgb, var(--color-bg) 95%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--color-line);
+}
+
+/* Menu open: fully opaque so the bar matches the menu panel below it
+   instead of showing the dark hero through the 95% scrolled fill. */
+.header:has(.mobile-menu.is-open) {
+  background: var(--color-bg);
+}
+
+.header__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: none;
+  padding-inline: 60px;
+}
+
+@media (max-width: 479px) {
+  .header__bar {
+    padding-inline: var(--gutter);
+  }
+}
+
+.header__brand {
+  display: block;
+  text-align: left;
+}
+
+.header__logo {
+  display: block;
+  width: auto;
+  height: 72px;
+  /* Logo is teal/sage on transparent; knock it to white over the hero, restore on scroll. */
+  filter: brightness(0) invert(1);
+  transition: filter 0.3s, height 0.25s ease;
+}
+
+.header.is-scrolled .header__logo {
+  height: 52px;
+  filter: none;
+}
+
+.header__nav {
+  display: none;
+  gap: var(--space-10);
+  align-items: center;
+}
+
+/* Eight links, the language pill and Book Now need 1280px; below that the
+   logo got squeezed and Book Now wrapped, so the hamburger takes over. */
+@media (min-width: 1280px) {
+  .header__nav {
+    display: flex;
+  }
+}
+
+/* Past 1440px the centred menu started to float (125px to each side at 1440,
+   217px at 1920). Grow the link gap from 30px at 1440 to 54px at 1920 so the
+   menu fills the bar and both side gaps stay proportional. */
+@media (min-width: 1440px) {
+  .header__nav {
+    gap: min(calc(5vw - 2.625rem), 4.5rem);
+  }
+}
+
+.header__link {
+  position: relative;
+  padding-block: var(--space-1);
+  font-size: var(--text-label);
+  font-weight: 500;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  color: rgb(255 255 255 / 90%);
+  transition: color 0.3s;
+}
+
+.header__link:hover {
+  color: var(--color-inverse);
+}
+
+.header.is-scrolled .header__link {
+  color: var(--color-muted);
+}
+
+.header.is-scrolled .header__link:hover {
+  color: var(--color-highlight);
+}
+
+/* Active page (main.js sets aria-current from <body data-page>): full-strength
+   label plus a sand rule under it, on the hero and on the scrolled header. */
+.header__link::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 calc(var(--space-1) * -1) 0;
+  height: 2px;
+  background: var(--color-highlight);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s var(--ease-out);
+}
+
+.header__link[aria-current="page"] {
+  color: var(--color-inverse);
+}
+
+.header__link[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
+.header.is-scrolled .header__link[aria-current="page"] {
+  color: var(--color-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header__link::after {
+    transition: none;
+  }
+}
+
+/* Booking button: sand over the hero photo, primary teal once the header goes light. */
+.header.is-scrolled .header__booking {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-inverse);
+}
+
+.header.is-scrolled .header__booking:hover {
+  background: var(--color-accent-dark);
+  border-color: var(--color-accent-dark);
+}
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.header__booking {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .header__booking {
+    display: inline-flex;
+  }
+}
+
+.header__toggle {
+  min-width: var(--control-min);
+  min-height: var(--control-min);
+  padding: var(--space-2);
+  color: var(--color-inverse);
+  transition: color 0.3s;
+}
+
+.header.is-scrolled .header__toggle {
+  color: var(--color-ink);
+}
+
+@media (min-width: 1280px) {
+  .header__toggle {
+    display: none;
+  }
+}
+
+.header__toggle-bar {
+  --bar-gap: clamp(0.3125rem, 0.3472vw, 0.5556rem); /* 5px */
+  display: block;
+  width: clamp(1.5rem, 1.6667vw, 2.6667rem);   /* 24px */
+  height: var(--rule-thick);
+  margin-block: var(--bar-gap);
+  background: currentColor;
+  transition: transform 200ms var(--ease-out), opacity 150ms var(--ease-out);
+}
+
+/* Open: outer bars fold onto the middle one into an X. Sibling margins
+   collapse, so bar centres sit one bar height plus one gap apart. */
+.header__toggle[aria-expanded="true"] .header__toggle-bar:nth-child(1) {
+  transform: translateY(calc(var(--rule-thick) + var(--bar-gap))) rotate(45deg);
+}
+
+.header__toggle[aria-expanded="true"] .header__toggle-bar:nth-child(2) {
+  opacity: 0;
+}
+
+.header__toggle[aria-expanded="true"] .header__toggle-bar:nth-child(3) {
+  transform: translateY(calc(-1 * (var(--rule-thick) + var(--bar-gap)))) rotate(-45deg);
+}
+
+/* ---------- Mobile menu ---------- */
+.mobile-menu {
+  position: absolute;
+  top: 100%;
+  inset-inline: 0;
+  display: none;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding: var(--space-8) var(--space-6);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-line);
+  /* Drops out from under the header bar, exits the same way. */
+  transform-origin: top center;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition:
+    opacity 200ms var(--ease-out),
+    transform 200ms var(--ease-out),
+    display 200ms allow-discrete;
+}
+
+.mobile-menu.is-open {
+  display: flex;
+  opacity: 1;
+  transform: none;
+}
+
+@starting-style {
+  .mobile-menu.is-open {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-menu,
+  .mobile-menu.is-open {
+    transform: none;
+  }
+
+  @starting-style {
+    .mobile-menu.is-open {
+      transform: none;
+    }
+  }
+}
+
+/* Menu is inside a fixed header, so the page cannot scroll it into view.
+   Cap it to the viewport and let it scroll itself. */
+@media (max-height: 720px), (max-width: 1279px) {
+  .mobile-menu {
+    max-height: calc(100svh - 100%);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+}
+
+.mobile-menu__link {
+  display: flex;
+  align-items: center;
+  min-height: var(--control-min);
+  padding-block: var(--space-2);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-line) 50%, transparent);
+  font-size: clamp(1.25rem, 1.1rem + 0.8vw, 1.625rem); /* 20px phone, 26px tablet */
+  font-weight: 500;
+  color: var(--color-ink);
+  text-align: left;
+}
+
+.mobile-menu__link:hover {
+  color: var(--color-highlight);
+}
+
+.mobile-menu__link[aria-current="page"] {
+  color: var(--color-highlight);
+  border-bottom-color: var(--color-highlight);
+}
+
+.mobile-menu__meta {
+  padding-top: var(--space-4);
+  border-top: 1px solid color-mix(in srgb, var(--color-line) 60%, transparent);
+  text-align: center;
+  font-size: var(--text-body-sm);
+  color: var(--color-soft);
+}
+
+.mobile-menu__meta em {
+  font-family: var(--font-serif);
+}
+
+/* ---------- Scroll reveal ----------
+   Elements with [data-reveal] enter once when scrolled into view. Decorative:
+   pointer-events stay on, and the observer marks everything visible if it
+   cannot run. An animation, not a transition: many revealed blocks (.card,
+   .info-item, ...) declare their own `transition` for hover, which replaced
+   the reveal transition outright and made them pop in with no fade. The
+   animation only fills backwards, so once it ends the element's own hover
+   transitions and transforms apply as normal. */
+[data-reveal] {
+  --reveal-y: 24px;
+  opacity: 0;
+  transform: translateY(var(--reveal-y));
+}
+
+[data-reveal].is-inview {
+  opacity: 1;
+  transform: none;
+  animation: reveal var(--dur-reveal) var(--ease-out) var(--reveal-delay, 0ms) backwards;
+}
+
+/* Stagger: main.js sets --reveal-delay on each element that enters in the
+   same observer batch (head, then cards left to right), --stagger apart. One
+   rule for every page instead of per-grid nth-child delays. */
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(var(--reveal-y));
+  }
+}
+
+/* Cards inside the horizontal track fade in without the vertical offset: the
+   translate would extend the track's scrollable height by 24px until the last
+   card is revealed. */
+.amenities__track > [data-reveal] {
+  --reveal-y: 0px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    --reveal-y: 0px;
+  }
+
+  [data-reveal].is-inview {
+    animation-duration: 400ms;
+  }
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  display: flex;
+  min-height: 100vh;
+  min-height: 100svh;
+  align-items: center;
+  justify-content: center;
+  padding-top: var(--space-16);
+  overflow: hidden;
+}
+
+.hero__media {
+  position: absolute;
+  inset: 0;
+}
+
+.hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: hero-zoom 1.8s var(--ease-out) both;
+}
+
+@keyframes hero-zoom {
+  from {
+    transform: scale(1.1);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.hero__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background: rgb(0 0 0 / 45%);
+}
+
+.hero__content {
+  position: relative;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: var(--content-width);
+  margin: auto;
+  padding: var(--space-12) var(--gutter) 0;
+  text-align: center;
+  animation: hero-rise 1s var(--ease-out) 0.3s both;
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero__kicker {
+  margin-bottom: var(--space-3);
+  font-size: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-weight: 500;
+  color: rgb(255 255 255 / 80%);
+}
+
+.hero__title {
+  margin-bottom: var(--space-6);
+  font-size: var(--text-h1);
+  color: var(--color-inverse);
+}
+
+.hero__tagline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  width: 100%;
+  margin-bottom: var(--space-8);
+}
+
+.hero__tagline-line {
+  flex-shrink: 0;
+  width: clamp(2rem, 2.2222vw, 3.5556rem); /* 32px */
+  height: 1px;
+  background: rgb(255 255 255 / 30%);
+}
+
+@media (min-width: 768px) {
+  .hero__tagline-line {
+    width: clamp(4rem, 4.4444vw, 7.1111rem); /* 64px */
+  }
+}
+
+.hero__tagline p {
+  max-width: var(--measure-md);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--text-h4);
+  font-weight: 300;
+  color: var(--color-inverse);
+}
+
+/* ---------- Booking widget ---------- */
+.booking {
+  width: 100%;
+  max-width: var(--measure-lg);
+  padding: var(--space-6);
+  background: color-mix(in srgb, var(--color-bg) 95%, transparent);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  animation: hero-rise 0.5s var(--ease-out) both;
+}
+
+@media (min-width: 768px) {
+  .booking {
+    padding: var(--space-8);
+  }
+}
+
+.booking__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  align-items: stretch;
+}
+
+@media (min-width: 768px) {
+  .booking__form {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+}
+
+.booking__field {
+  flex: 1;
+  text-align: left;
+}
+
+.booking__label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  color: var(--color-soft);
+}
+
+.booking__label svg {
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+  color: var(--color-highlight);
+}
+
+.booking__input {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  font-size: var(--text-body-sm);
+  font-weight: 500;
+  color: var(--color-ink);
+  cursor: pointer;
+}
+
+.booking__input:hover,
+.booking__input:focus {
+  border-color: var(--color-highlight);
+}
+
+.booking__input:invalid {
+  color: var(--color-soft);
+}
+
+.booking__select {
+  position: relative;
+}
+
+.booking__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  font-size: var(--text-body-sm);
+  font-weight: 500;
+  color: var(--color-ink);
+  text-align: left;
+}
+
+.booking__trigger:hover,
+.booking__trigger[aria-expanded="true"] {
+  border-color: var(--color-highlight);
+}
+
+.booking__trigger svg {
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+  color: var(--color-soft);
+}
+
+.booking__menu {
+  position: absolute;
+  top: calc(100% + var(--space-1));
+  inset-inline: 0;
+  z-index: 30;
+  display: none;
+  flex-direction: column;
+  padding-block: var(--space-1);
+  background: var(--color-card);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  /* Grows out of the trigger sitting directly above it. */
+  transform-origin: top center;
+  opacity: 0;
+  transform: scale(0.97) translateY(-4px);
+  transition:
+    opacity 150ms var(--ease-out),
+    transform 150ms var(--ease-out),
+    display 150ms allow-discrete;
+}
+
+.booking__menu.is-open {
+  display: flex;
+  opacity: 1;
+  transform: none;
+}
+
+@starting-style {
+  .booking__menu.is-open {
+    opacity: 0;
+    transform: scale(0.97) translateY(-4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .booking__menu,
+  .booking__menu.is-open {
+    transform: none;
+  }
+
+  @starting-style {
+    .booking__menu.is-open {
+      transform: none;
+    }
+  }
+}
+
+.booking__option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-body-sm);
+  color: var(--color-ink);
+  text-align: left;
+}
+
+.booking__option:hover {
+  background: var(--color-surface);
+}
+
+.booking__option[aria-selected="true"] {
+  color: var(--color-highlight);
+}
+
+.booking__submit {
+  flex: 1;
+}
+
+/* Stacked form: the button must match the full-width inputs above it. */
+.booking__submit .button {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .booking__submit .button {
+    width: auto;
+  }
+}
+
+.booking__note {
+  margin-top: var(--space-4);
+  text-align: center;
+  font-size: var(--text-body-sm);
+  font-weight: 500;
+  color: var(--color-ink);
+}
+
+.booking__note.is-error {
+  color: var(--color-error);
+}
+
+.booking__note[hidden] {
+  display: none;
+}
+
+/* ---------- Welcome ---------- */
+.welcome {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+}
+
+.welcome__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  text-align: left;
+}
+
+.welcome__eyebrow {
+  display: block;
+  margin-bottom: var(--space-3);
+  font-size: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-weight: 600;
+  color: var(--color-highlight-text);
+}
+
+.welcome__title {
+  font-size: var(--text-h2);
+  text-align: left;
+  color: var(--color-ink);
+}
+
+.welcome__tagline {
+  margin-top: var(--space-3);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--text-body-lg);
+  color: var(--color-highlight-text);
+}
+
+.welcome__text {
+  margin-top: var(--space-6);
+  font-size: var(--text-body-sm);
+  line-height: 1.8;
+  color: var(--color-muted);
+  text-align: left;
+}
+
+.welcome__text + .welcome__text {
+  margin-top: var(--space-4);
+}
+
+/* ---------- Island map card ---------- */
+.map {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: var(--media-h-lg);
+  padding: var(--space-6);
+  background: var(--color-card);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .map {
+    padding: var(--space-12);
+  }
+}
+
+.map__legend {
+  position: relative;
+  z-index: 10;
+}
+
+.map__legend-label {
+  display: block;
+  font-size: var(--text-caption);
+  font-weight: 700;
+  color: var(--color-soft);
+}
+
+.map__legend-sub {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--text-body-sm);
+  color: var(--color-highlight-text);
+}
+
+.map__contours {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  color: var(--color-accent);
+}
+
+.map__contours svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.map__land path {
+  fill: color-mix(in srgb, var(--color-accent) 9%, transparent);
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+  opacity: 0.55;
+}
+
+/* Highland contour rings — Nusa Penida is a limestone plateau rising
+   towards its southern cliffs. */
+.map__relief path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-dasharray: 7 9;
+  opacity: 0.3;
+}
+
+.map__place {
+  fill: var(--color-soft);
+  font-family: var(--font-sans);
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: 7px;
+  text-anchor: middle;
+  opacity: 0.75;
+}
+
+.map__place--sm {
+  font-size: 20px;
+  letter-spacing: 2px;
+}
+
+@media (max-width: 767px) {
+  .map__place--sm {
+    display: none;
+  }
+}
+
+.map__footer {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-line);
+  font-size: var(--text-caption);
+}
+
+.map__footer-label {
+  color: var(--color-soft);
+}
+
+.map__footer-sub {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--color-highlight-text);
+}
+
+.map__points {
+  position: relative;
+  flex: 0 0 auto;
+  width: 100%;
+  aspect-ratio: 810 / 520;
+  margin-block: auto;
+}
+
+.poi {
+  position: absolute;
+  /* Fixed-size anchor pinned by negative margin rather than a centring
+     transform, so opening the label cannot shift the marker off its place. */
+  width: var(--poi-size);
+  height: var(--poi-size);
+  margin: calc(var(--poi-size) / -2) 0 0 calc(var(--poi-size) / -2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(255 255 255 / 95%);
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  transition: border-color 0.3s;
+}
+
+/* Marker stays 30px on the map; the hit area grows to 44px around it. */
+.poi::after {
+  content: "";
+  position: absolute;
+  inset: calc((var(--poi-size) - var(--control-min)) / 2);
+}
+
+/* Off-island gateway (Bali mainland), drawn in the sea. */
+.poi--gateway {
+  border-style: dashed;
+}
+
+.poi:hover,
+.poi:focus,
+.poi:focus-visible {
+  border-color: var(--color-highlight);
+}
+
+/* A revealed label must not be clipped by the card's rounded corners. */
+.poi:focus,
+.poi:hover {
+  z-index: 20;
+}
+
+.poi:not(.poi--resort) .poi__name {
+  display: none;
+}
+
+.poi:not(.poi--resort):hover .poi__name,
+.poi:not(.poi--resort):focus .poi__name,
+.poi:not(.poi--resort):focus-visible .poi__name {
+  display: inline;
+}
+
+.poi__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-muted);
+}
+
+.poi__icon svg {
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+}
+
+.poi--resort {
+  width: var(--poi-size-lg);
+  height: var(--poi-size-lg);
+  margin: calc(var(--poi-size-lg) / -2) 0 0 calc(var(--poi-size-lg) / -2);
+  background: none;
+  border: none;
+}
+
+.poi--resort .poi__icon {
+  width: var(--poi-size-lg);
+  height: var(--poi-size-lg);
+  background: var(--color-highlight);
+  color: var(--color-inverse);
+  border-radius: 999px;
+  box-shadow: 0 4px 10px color-mix(in srgb, var(--color-highlight) 35%, transparent);
+}
+
+.poi--resort .poi__icon svg {
+  width: var(--poi-icon);
+  height: var(--poi-icon);
+}
+
+.poi--resort .poi__name {
+  top: calc(100% + clamp(0.5rem, 0.5556vw, 0.8889rem)); /* 8px */
+  left: 50%;
+  right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--rule-thick);
+  max-width: var(--poi-label-max-lg);
+  padding: var(--space-1) var(--space-3);
+  transform: translateX(-50%);
+  font-family: var(--font-serif);
+  font-size: var(--text-caption);
+  font-weight: 500;
+  text-align: center;
+}
+
+.poi--resort .poi__kicker {
+  font-family: var(--font-sans);
+  font-size: var(--text-caption);
+  font-weight: 700;
+  letter-spacing: var(--tracking-caps);
+  color: var(--color-soft);
+}
+
+.poi__name {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + var(--poi-label-gap));
+  z-index: 1;
+  width: max-content;
+  max-width: var(--poi-label-max);
+  padding: var(--space-1) var(--space-2);
+  background: var(--color-card);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 10px rgb(0 0 0 / 8%);
+  transform: translateY(-50%);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--color-ink);
+}
+
+/* Markers near the right edge open their label inwards. */
+.poi--label-start .poi__name {
+  left: auto;
+  right: calc(100% + var(--poi-label-gap));
+}
+
+/* Marker coordinates are percentages of the map's "150 140 810 520" viewBox,
+   so each pin sits on its real location on Nusa Penida (home, contact). */
+.poi--resort-pos { left: 49.1%; top: 16.5%; }    /* Ped / Sental, north coast */
+.poi--harbor-pos { left: 64%; top: 10.6%; }      /* Sampalan / Buyuk harbour */
+.poi--billabong-pos { left: 10.1%; top: 41.9%; } /* west coast */
+.poi--kelingking-pos { left: 27.2%; top: 69.2%; }/* south-west clifftop */
+.poi--diamond-pos { left: 87.4%; top: 82.7%; }   /* Atuh, south-east */
+.poi--airport-pos { left: 3.5%; top: 55.8%; }    /* off-island: Bali, due west */
+
+/* ---------- Highlights (story chapters) ---------- */
+/* ---------- Hotel information band ---------- */
+.info {
+  padding-block: var(--space-16);
+  background: var(--color-ink);
+  color: var(--color-inverse);
+}
+
+.info__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+}
+
+.info__head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  align-items: flex-start;
+  text-align: left;
+}
+
+@media (min-width: 768px) {
+  .info__head {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+}
+
+.info__kicker {
+  display: block;
+  margin-bottom: var(--space-3);
+  font-size: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-weight: 600;
+  color: var(--color-highlight);
+}
+
+.info__title {
+  font-size: var(--text-h3);
+  text-align: left;
+  color: var(--color-inverse);
+}
+
+.info__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: rgb(255 255 255 / 12%);
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .info__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .info__grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  /* Four-item bands (policies, ratings) stay 2 / 2 / 4. */
+  .info__grid--4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .info__grid--4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Footnote under the grid (policy caveats, data source). */
+.info__note {
+  max-width: var(--measure-md);
+  font-size: var(--text-body-sm);
+  line-height: var(--line-body);
+  color: rgb(255 255 255 / 70%);
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-6) var(--space-5);
+  background: var(--color-ink);
+}
+
+.info-item__icon {
+  display: flex;
+  margin-bottom: var(--space-3);
+  color: var(--color-highlight);
+}
+
+.info-item__icon svg {
+  width: var(--icon-lg);
+  height: var(--icon-lg);
+}
+
+.info-item__label {
+  min-height: calc(2 * 1.4em);
+  font-size: var(--text-caption);
+  line-height: 1.4;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-weight: 600;
+  color: rgb(255 255 255 / 60%);
+}
+
+.info-item__value {
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: var(--text-h4);
+  line-height: var(--line-tight);
+  color: var(--color-inverse);
+}
+
+.highlights {
+  padding-block: var(--space-24);
+  background: var(--color-surface);
+}
+
+.chapter {
+  max-width: var(--content-width);
+  margin-inline: auto;
+  padding-inline: 0;
+}
+
+.chapter + .chapter {
+  margin-top: var(--space-24);
+}
+
+.chapter__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-16);
+  padding-inline: var(--gutter);
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .chapter__grid {
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--space-24);
+  }
+
+  .chapter--flip .chapter__media {
+    order: 2;
+  }
+
+  .chapter--flip .chapter__body {
+    order: 1;
+  }
+}
+
+.chapter__media {
+  position: relative;
+  height: var(--media-h-md);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  overflow: hidden; /* fallback for browsers without overflow: clip */
+  overflow: clip; /* unlike hidden, this does not register as a scroll
+    container — the child img's view() timeline needs to track the page
+    scroller, not this fixed, never-scrolling crop box. */
+}
+
+@media (min-width: 768px) {
+  .chapter__media {
+    height: var(--media-h-lg);
+  }
+}
+
+@media (min-width: 1024px) {
+  .chapter__media {
+    grid-column: span 7;
+  }
+}
+
+/* Opening-hours pills overlaid on the chapter image. */
+.chapter__badges {
+  position: absolute;
+  bottom: var(--space-5);
+  left: var(--space-5);
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  max-width: calc(100% - 2 * var(--space-5));
+}
+
+.chapter__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background: color-mix(in srgb, var(--color-bg) 92%, transparent);
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  font-size: var(--text-caption);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--color-ink);
+}
+
+.chapter__badge svg {
+  flex-shrink: 0;
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+  color: var(--color-highlight-text);
+}
+
+.chapter__body {
+  text-align: left;
+}
+
+@media (min-width: 1024px) {
+  .chapter__body {
+    grid-column: span 5;
+  }
+}
+
+.chapter__kicker {
+  display: block;
+  margin-bottom: var(--space-3);
+  font-size: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-weight: 500;
+  color: var(--color-highlight-text);
+}
+
+.chapter__subtitle {
+  display: block;
+  margin-bottom: var(--space-2);
+  font-family: var(--font-sans);
+  font-size: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-weight: 500;
+  color: var(--color-highlight-text);
+}
+
+.chapter__title {
+  margin-bottom: var(--space-4);
+  font-size: var(--text-h3);
+  color: var(--color-ink);
+}
+
+.chapter__text {
+  font-size: var(--text-body-sm);
+  line-height: 1.8;
+  color: var(--color-muted);
+}
+
+.chapter__text + .chapter__text {
+  margin-top: var(--space-4);
+}
+
+.chapter__tagline {
+  margin-top: calc(-1 * var(--space-2));
+  margin-bottom: var(--space-4);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--text-body-lg);
+  color: var(--color-highlight-text);
+}
+
+/* ---------- Rooms gallery ---------- */
+.rooms {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+}
+
+.rooms__tabs {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: var(--space-2);
+  padding-top: var(--space-5);
+  border-bottom: 1px solid var(--color-line);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.rooms__tabs::-webkit-scrollbar {
+  display: none;
+}
+
+/* Wrapping put the active tab's underline mid-list, detached from the
+   bottom rule. Scroll on phones, wrap once there is room. */
+@media (min-width: 768px) {
+  .rooms__tabs {
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
+}
+
+.room-tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  white-space: nowrap;
+  min-height: var(--control-min);
+  padding: var(--space-3) var(--space-5);
+  font-size: var(--text-label);
+  font-weight: 500;
+  color: var(--color-soft);
+  transition: color 0.3s;
+}
+
+.room-tab:hover {
+  color: var(--color-ink);
+}
+
+.room-tab::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: var(--rule-thick);
+  background: transparent;
+  transition: background-color 200ms var(--ease-out);
+}
+
+.room-tab.is-active {
+  color: var(--color-ink);
+}
+
+.room-tab.is-active::after {
+  background: var(--color-highlight);
+}
+
+.room {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-16);
+  align-items: stretch;
+  margin-top: var(--space-12);
+}
+
+@media (min-width: 1024px) {
+  .room {
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+  .room__gallery {
+    grid-column: span 7;
+  }
+
+  .room__panel {
+    grid-column: span 5;
+  }
+}
+
+/* Gallery and panel are re-created on every tab switch; give the new nodes a
+   short entrance so the swap reads as a change, not a teleport. Enter only —
+   the old nodes are already gone. */
+.room__gallery,
+.room__panel {
+  transition: opacity 250ms var(--ease-out), transform 250ms var(--ease-out);
+}
+
+@starting-style {
+  .room__gallery,
+  .room__panel {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @starting-style {
+    .room__gallery,
+    .room__panel {
+      transform: none;
+    }
+  }
+}
+
+.room__frame {
+  position: relative;
+  min-height: var(--frame-h-room);
+  height: 100%;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.room__frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--dur-zoom) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .room__frame:hover img {
+    transform: scale(var(--zoom-scale));
+  }
+}
+
+.room__tags {
+  position: absolute;
+  top: var(--space-6);
+  left: var(--space-6);
+  z-index: 10;
+  display: flex;
+  gap: var(--space-2);
+}
+
+.tag {
+  padding: var(--space-2) var(--space-4);
+  background: color-mix(in srgb, var(--color-bg) 90%, transparent);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-caption);
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.room__panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-8);
+  background: var(--color-card);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+}
+
+@media (min-width: 768px) {
+  .room__panel {
+    padding: var(--space-12);
+  }
+}
+
+.room__name {
+  margin-bottom: var(--space-4);
+  font-size: var(--text-h3);
+  color: var(--color-ink);
+}
+
+.room__desc {
+  margin-bottom: var(--space-8);
+  font-size: var(--text-body-sm);
+  line-height: 1.8;
+  color: var(--color-muted);
+}
+
+.room__specs {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+  padding-block: var(--space-6);
+  margin-bottom: var(--space-8);
+  border-block: 1px solid color-mix(in srgb, var(--color-line) 60%, transparent);
+}
+
+/* Chapter card text has no bottom margin of its own; give the specs grid
+   breathing room below it (room-detail's .room__desc already carries its
+   own margin-bottom, so this stays scoped to the chapter/listing context). */
+.chapter__text + .room__specs {
+  margin-top: var(--space-8);
+}
+
+@media (min-width: 480px) {
+  .room__specs {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+  }
+}
+
+.spec {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.spec__icon {
+  color: var(--color-soft);
+}
+
+.spec__icon svg {
+  width: var(--icon-lg);
+  height: var(--icon-lg);
+}
+
+.spec__label {
+  display: block;
+  font-size: var(--text-caption);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-weight: 600;
+  color: var(--color-soft);
+}
+
+.spec__value {
+  font-family: var(--font-ui);
+  font-size: var(--text-body-sm);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  font-feature-settings: "tnum" 1, "cv11" 1;
+  color: var(--color-ink);
+}
+
+.room__details-label {
+  display: block;
+  margin-bottom: var(--space-3);
+  font-size: var(--text-caption);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-weight: 600;
+  color: var(--color-soft);
+}
+
+.room__details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-8);
+}
+
+.room__detail {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-body-sm);
+  font-weight: 300;
+  color: var(--color-muted);
+}
+
+.room__detail::before {
+  content: "";
+  flex-shrink: 0;
+  width: var(--dot-sm);
+  height: var(--dot-sm);
+  margin-top: var(--dot-sm);
+  background: var(--color-accent);
+  border-radius: 999px;
+}
+
+/* Icon-led amenity item: replaces the plain bullet dot above. */
+.room__detail-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--icon-md);
+  color: var(--color-accent);
+}
+
+.room__detail-icon svg {
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+}
+
+.room__detail:has(.room__detail-icon)::before {
+  display: none;
+}
+
+.room__detail.is-extra[hidden] {
+  display: none;
+}
+
+.room__more {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+  font-size: var(--text-label);
+  font-weight: 600;
+  color: var(--color-highlight-text);
+  transition: color 0.3s;
+}
+
+.room__more:hover {
+  color: var(--color-ink);
+}
+
+.room__more svg {
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+  transition: transform 200ms var(--ease-out);
+}
+
+.room__more:hover svg {
+  transform: translateX(3px);
+}
+
+.room__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+@media (min-width: 640px) {
+  .room__actions {
+    flex-direction: row;
+  }
+}
+
+.room__actions .button {
+  flex: 1;
+}
+
+/* ---------- Amenities carousel ---------- */
+.amenities {
+  /* Inline inset that lands on the same edge as .container's content box,
+     so the head/CTA stay aligned while the slider bleeds to the viewport. */
+  --amenities-inset: max(var(--gutter), calc((100% - var(--content-width)) / 2 + var(--gutter)));
+  padding-block: var(--space-24);
+  background: var(--color-surface);
+}
+
+/* Full-width wrapper; each child applies the inset itself. */
+.amenities__container {
+  width: 100%;
+}
+
+/* Head row (section-head + optional button) and the CTA band under the
+   track share the container inset. Used on home and the spa page. */
+.amenities__head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  align-items: flex-start;
+  padding-inline: var(--amenities-inset);
+  margin-bottom: var(--space-12);
+}
+
+@media (min-width: 768px) {
+  .amenities__head {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+}
+
+.amenities__head .section-head {
+  margin-bottom: 0;
+}
+
+.amenities__cta {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .amenities__cta {
+    flex-shrink: 0;
+    width: auto;
+  }
+}
+
+.amenities__cta .button {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .amenities__cta .button {
+    width: auto;
+  }
+}
+
+.amenities__viewport {
+  position: relative;
+  width: 100%;
+}
+
+.amenities__arrow {
+  position: absolute;
+  /* Sit over the card image (half the media height + track top padding), not
+     over the body copy. Derived from the token so it tracks the fluid card. */
+  top: calc(var(--space-2) + var(--media-h-sm) / 2);
+  z-index: 20;
+  /* Overlaid the card body on phones; native swipe covers it there. */
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: var(--control-min);
+  height: var(--control-min);
+  background: rgb(255 255 255 / 90%);
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  backdrop-filter: blur(4px);
+  transform: translateY(-50%);
+  transition: background-color 0.3s, opacity 0.3s, transform 120ms var(--ease-out);
+}
+
+.amenities__arrow:active:not(:disabled) {
+  transform: translateY(-50%) scale(0.92);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .amenities__arrow:active:not(:disabled) {
+    transform: translateY(-50%);
+  }
+}
+
+@media (min-width: 768px) {
+  .amenities__arrow {
+    display: flex;
+  }
+}
+
+.amenities__arrow:hover {
+  background: var(--color-card);
+}
+
+.amenities__arrow:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.amenities__arrow--left {
+  left: max(var(--space-4), calc(var(--amenities-inset) - var(--space-4)));
+}
+
+.amenities__arrow--right {
+  right: max(var(--space-4), calc(var(--amenities-inset) - var(--space-4)));
+}
+
+.amenities__arrow svg {
+  width: var(--icon-md);
+  height: var(--icon-md);
+}
+
+.amenities__track {
+  display: flex;
+  gap: var(--space-5);
+  /* Track spans the full viewport so cards are never clipped; the inline
+     inset keeps the first card aligned with the section heading. */
+  padding: var(--space-2) var(--amenities-inset) var(--space-4);
+  overflow-x: auto;
+  /* overflow-x: auto alone makes overflow-y compute to auto as well, and the
+     24px [data-reveal] offset on cards not yet in view then makes the track
+     scroll vertically on a trackpad. Clip it. */
+  overflow-y: hidden;
+  scroll-snap-type: x proximity;
+  scroll-padding-inline: var(--amenities-inset);
+  /* Scrollbar hidden; arrows and native swipe handle navigation. */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.amenities__track::-webkit-scrollbar {
+  display: none;
+}
+
+.amenity {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 0 0 85%;
+  scroll-snap-align: start;
+  background: var(--color-card);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+
+.amenity:hover {
+  border-color: var(--color-highlight);
+}
+
+@media (min-width: 768px) {
+  .amenity {
+    flex-basis: calc((100% - 2 * var(--space-5)) / 3);
+  }
+}
+
+.amenity__media {
+  position: relative;
+  height: var(--media-h-sm);
+  overflow: hidden;
+}
+
+.amenity__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--dur-zoom) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .amenity:hover .amenity__media img {
+    transform: scale(var(--zoom-scale));
+  }
+}
+
+.amenity__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, color-mix(in srgb, var(--color-ink) 40%, transparent), transparent);
+}
+
+.amenity__icon {
+  position: absolute;
+  top: var(--space-4);
+  left: var(--space-4);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2);
+  background: var(--color-card);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  color: var(--color-ink);
+}
+
+.amenity__icon svg {
+  width: var(--icon-md);
+  height: var(--icon-md);
+  color: var(--color-highlight);
+}
+
+/* Cards whose photo is still pending in the content doc: flat surface with the
+   facility icon, labelled so it never reads as a broken image. */
+.amenity__media--pending {
+  display: flex;
+  align-items: flex-end;
+  padding: var(--space-4);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.amenity__pending {
+  font-size: var(--text-caption);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--color-soft);
+}
+
+.amenity__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: var(--space-5);
+  text-align: left;
+}
+
+.amenity__label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-caption);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-weight: 700;
+  color: var(--color-soft);
+}
+
+.amenity__name {
+  margin-block: var(--space-2) var(--space-3);
+  font-size: var(--text-h4);
+  color: var(--color-ink);
+}
+
+.amenity__tagline {
+  margin-top: calc(-1 * var(--space-2));
+  margin-bottom: var(--space-3);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--text-body-sm);
+  color: var(--color-highlight-text);
+}
+
+.amenity__text {
+  margin-bottom: var(--space-4);
+  font-size: var(--text-body-sm);
+  line-height: 1.7;
+  color: var(--color-muted);
+}
+
+/* Opening-hours list pinned to the foot of the card so rows align across
+   cards with different copy lengths. */
+.amenity__meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: auto;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-line);
+  font-size: var(--text-caption);
+}
+
+.amenity__meta div {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.amenity__meta dt {
+  color: var(--color-soft);
+}
+
+.amenity__meta dd {
+  flex-shrink: 0;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+/* ---------- Concierge CTA ---------- */
+.cta {
+  padding-inline: var(--gutter);
+}
+
+.cta__inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  align-items: center;
+  padding: var(--space-8) var(--space-6);
+  background: var(--color-ink);
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .cta__inner {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+    padding: var(--space-12) var(--space-16);
+  }
+}
+
+.cta__label {
+  display: block;
+  margin-bottom: var(--space-2);
+  font-size: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-weight: 700;
+  color: var(--color-highlight);
+}
+
+.cta__title {
+  max-width: var(--measure-sm);
+  font-size: var(--text-h4);
+  color: var(--color-inverse);
+}
+
+/* ---------- CTA, photo band ----------
+   Closing call to action on every inner page and the home tailored-stays
+   band: full-bleed decorative photo, centred copy, one or two buttons.
+   Photo under a flat scrim plus a centre-weighted gradient so white text
+   holds contrast whatever the photo's brightness. */
+.cta-photo {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: clamp(30rem, 70svh, 46rem);
+  padding-block: var(--space-24);
+  overflow: hidden; /* fallback for browsers without overflow: clip */
+  overflow: clip; /* not a scroll container, so the photo's parallax tracks the page */
+  background: var(--color-ink);
+  color: var(--color-inverse);
+  isolation: isolate;
+}
+
+.cta-photo__media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+
+.cta-photo__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse at center, rgb(0 0 0 / 35%), transparent 70%),
+    rgb(0 0 0 / 45%);
+}
+
+.cta-photo__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.cta-photo__kicker {
+  margin-bottom: var(--space-5);
+  font-size: var(--text-label);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--color-inverse);
+}
+
+.cta-photo__title {
+  max-width: var(--measure-md);
+  margin: 0;
+  font-size: var(--text-h3);
+  line-height: var(--line-tight);
+  color: var(--color-inverse);
+  text-wrap: balance;
+}
+
+.cta-photo__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+  margin-top: var(--space-10);
+}
+
+@media (min-width: 640px) {
+  .cta-photo__actions {
+    flex-direction: row;
+    justify-content: center;
+    width: auto;
+  }
+}
+
+/* ---------- FAQ & reviews ---------- */
+.faq {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+}
+
+.faq__filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--control-min);
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  font-size: var(--text-label);
+  font-weight: 600;
+  color: var(--color-soft);
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.chip:hover {
+  border-color: var(--color-highlight);
+  color: var(--color-highlight);
+}
+
+.chip.is-active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-inverse);
+}
+
+.faq__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.accordion__item {
+  background: var(--color-card);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.accordion__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  width: 100%;
+  padding: var(--space-4) var(--space-6);
+  text-align: left;
+  transition: background-color 0.3s;
+}
+
+.accordion__trigger:hover {
+  background: color-mix(in srgb, var(--color-surface) 40%, transparent);
+}
+
+.accordion__question {
+  font-family: var(--font-serif);
+  font-size: var(--text-body-lg);
+  font-weight: 500;
+  color: var(--color-ink);
+}
+
+.accordion__indicator {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2);
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  color: var(--color-highlight);
+  font-size: var(--text-body);
+  line-height: 1;
+}
+
+.accordion__indicator svg {
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+  transition: transform 200ms var(--ease-out);
+}
+
+/* One plus icon; open state rotates it into a cross. */
+.accordion__trigger[aria-expanded="true"] .accordion__indicator svg {
+  transform: rotate(45deg);
+}
+
+.accordion__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition: grid-template-rows 300ms var(--ease-out), visibility 300ms;
+}
+
+.accordion__panel.is-open {
+  grid-template-rows: 1fr;
+  visibility: visible;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .accordion__panel {
+    transition-duration: 0.01ms;
+  }
+
+  .accordion__indicator svg {
+    transition: none;
+  }
+}
+
+.accordion__panel-inner {
+  overflow: hidden;
+}
+
+.accordion__answer {
+  padding: var(--space-6);
+  border-top: 1px solid color-mix(in srgb, var(--color-line) 50%, transparent);
+  font-size: var(--text-body);
+  line-height: 1.8;
+  font-weight: 300;
+  color: var(--color-muted);
+}
+
+/* Multi-paragraph answers: only the first <p> carries the divider and top padding. */
+.accordion__answer + .accordion__answer {
+  padding-top: 0;
+  border-top: 0;
+}
+
+/* ---------- Reviews card ---------- */
+.reviews {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: var(--space-8);
+  background: var(--color-card);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+}
+
+@media (min-width: 768px) {
+  .reviews {
+    padding: var(--space-12);
+  }
+}
+
+.reviews__stars {
+  display: flex;
+  gap: var(--space-1);
+  margin-bottom: var(--space-3);
+  color: var(--color-highlight);
+}
+
+.reviews__stars svg {
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+}
+
+.reviews__eyebrow {
+  display: block;
+  margin-bottom: var(--space-4);
+  font-size: var(--text-label);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-weight: 500;
+  color: var(--color-soft);
+}
+
+.reviews__track {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  margin-block: var(--space-6);
+}
+
+.review {
+  padding-bottom: var(--space-6);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-line) 60%, transparent);
+}
+
+.review:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.review__text {
+  margin-bottom: var(--space-3);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--text-body-lg);
+  line-height: 1.7;
+  color: var(--color-ink);
+}
+
+.review__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  font-size: var(--text-body-sm);
+  color: var(--color-soft);
+}
+
+.review__meta strong {
+  font-weight: 600;
+  color: var(--color-muted);
+}
+
+/* Separator rides with the name so a wrap never starts a line with a dot. */
+.review__meta strong::after {
+  content: " ·";
+}
+
+/* ---------- Footer ----------
+   Brand teal (the logo's own colour) instead of ink so the page ends on the
+   identity. Text on teal: full white or 75% white (5.1:1); sand fails at
+   label size here, so it stays out of the footer. */
+.footer {
+  padding: var(--space-24) 0 var(--space-10);
+  background: var(--color-brand);
+  color: var(--color-inverse);
+}
+
+.footer :focus-visible {
+  outline-color: var(--color-inverse);
+}
+
+.footer__container {
+  width: 100%;
+  max-width: var(--content-width);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Brand + contact | Explore | Discover more | Follow us.
+   Phone: brand and socials take full rows, the two link lists share one. */
+.footer__top {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-12) var(--space-8);
+  padding-bottom: var(--space-16);
+}
+
+.footer__brand,
+.footer__follow {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 768px) {
+  .footer__top {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .footer__follow {
+    grid-column: auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .footer__top {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.9fr) minmax(0, 1.2fr) auto;
+    column-gap: var(--space-16);
+  }
+
+  .footer__brand {
+    grid-column: auto;
+  }
+}
+
+.footer__logo-link {
+  display: inline-block;
+}
+
+.footer__logo {
+  display: block;
+  width: auto;
+  height: clamp(6.5rem, 7.2222vw, 11.5556rem); /* 104px */
+  /* Same knockout as the header logo over the hero. */
+  filter: brightness(0) invert(1);
+}
+
+.footer__contact {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-top: var(--space-10);
+  font-size: var(--text-body-sm);
+  font-style: normal;
+  line-height: var(--line-snug);
+  color: rgb(255 255 255 / 75%);
+}
+
+.footer__contact-item {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  max-width: 38ch;
+  transition: color 0.3s;
+}
+
+.footer__contact-item svg {
+  flex-shrink: 0;
+  width: var(--icon-md);
+  height: var(--icon-md);
+  margin-top: 0.05em;
+}
+
+a.footer__contact-item:hover {
+  color: var(--color-inverse);
+}
+
+.footer__heading {
+  margin-bottom: var(--space-5);
+  font-family: var(--font-sans);
+  font-size: var(--text-label);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-inverse);
+}
+
+.footer__list {
+  display: flex;
+  flex-direction: column;
+  font-size: var(--text-body-sm);
+  color: rgb(255 255 255 / 75%);
+}
+
+.footer__list a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--control-min);
+  transition: color 0.3s;
+}
+
+/* Mouse users do not need 44px rows; the tighter rhythm keeps both lists
+   level with the brand block. Touch keeps the full target. */
+@media (pointer: fine) {
+  .footer__list a {
+    min-height: 2.1em;
+  }
+}
+
+.footer__list a:hover {
+  color: var(--color-inverse);
+}
+
+.footer__socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.footer__social {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--control-min);
+  height: var(--control-min);
+  border: 1px solid rgb(255 255 255 / 30%);
+  border-radius: 999px;
+  color: var(--color-inverse);
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s;
+}
+
+.footer__social:hover {
+  background: var(--color-inverse);
+  border-color: var(--color-inverse);
+  color: var(--color-brand);
+}
+
+.footer__social svg {
+  width: var(--icon-md);
+  height: var(--icon-md);
+}
+
+/* Newsletter row between the link grid and the legal bar. */
+.footer__newsletter {
+  display: grid;
+  gap: var(--space-6);
+  padding-block: var(--space-12);
+  border-top: 1px solid rgb(255 255 255 / 15%);
+}
+
+/* display: grid above would otherwise override the hidden attribute. */
+.footer__newsletter[hidden] {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .footer__newsletter {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    column-gap: var(--space-16);
+  }
+}
+
+.footer__newsletter-title {
+  font-family: var(--font-serif);
+  font-size: var(--text-h4);
+  font-weight: 400;
+  line-height: var(--line-tight);
+}
+
+.footer__newsletter-text {
+  max-width: var(--measure-sm);
+  margin-top: var(--space-2);
+  font-size: var(--text-body-sm);
+  line-height: var(--line-body);
+  color: rgb(255 255 255 / 75%);
+}
+
+.footer__subscribe-row {
+  display: flex;
+  gap: var(--space-3);
+}
+
+@media (max-width: 479px) {
+  .footer__subscribe-row {
+    flex-direction: column;
+  }
+}
+
+.footer__input {
+  flex: 1;
+  min-width: 0;
+  min-height: var(--control-min);
+  padding: var(--space-3) var(--space-6);
+  background: rgb(255 255 255 / 8%);
+  border: 1px solid rgb(255 255 255 / 35%);
+  border-radius: 999px;
+  font-size: var(--text-body-sm);
+  color: var(--color-inverse);
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+.footer__input::placeholder {
+  color: rgb(255 255 255 / 80%);
+}
+
+.footer__input:hover,
+.footer__input:focus {
+  background: rgb(255 255 255 / 12%);
+  border-color: var(--color-inverse);
+  outline: none;
+}
+
+.footer__input:focus-visible {
+  outline: 2px solid var(--color-inverse);
+  outline-offset: 2px;
+}
+
+.footer__input[aria-invalid="true"] {
+  border-color: var(--color-inverse);
+  border-width: 2px;
+}
+
+.footer__subscribe-status {
+  margin-top: var(--space-3);
+  font-size: var(--text-body-sm);
+  color: var(--color-inverse);
+}
+
+.footer__subscribe-status:empty {
+  display: none;
+}
+
+.footer__bottom {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  align-items: flex-start;
+  padding-top: var(--space-8);
+  border-top: 1px solid rgb(255 255 255 / 15%);
+  font-size: var(--text-caption);
+  color: rgb(255 255 255 / 75%);
+}
+
+@media (min-width: 1024px) {
+  .footer__bottom {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-6);
+}
+
+.footer__legal-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--control-min);
+  transition: color 0.3s;
+}
+
+.footer__legal-link:hover {
+  color: var(--color-inverse);
+}
+
+/* ---------- Footer, legacy (index.html, id/index.html) ----------
+   The single-page home keeps its original ink footer. Scoped under
+   .footer--legacy so it restores the old values over the shared footer rules
+   above; remove this block once index.html moves to the new footer. */
+.footer--legacy {
+  padding: var(--space-24) 0 var(--space-12);
+  background: var(--color-ink);
+  border-top: 1px solid color-mix(in srgb, var(--color-highlight) 10%, transparent);
+}
+
+.footer--legacy .footer__brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: var(--space-16);
+  margin-bottom: var(--space-16);
+  border-bottom: 1px solid rgb(255 255 255 / 10%);
+  text-align: center;
+}
+
+.footer--legacy .footer__emblem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--emblem-size);
+  height: var(--emblem-size);
+  margin-bottom: var(--space-6);
+  border: 1px solid var(--color-highlight);
+  border-radius: 999px;
+  color: var(--color-highlight);
+}
+
+.footer--legacy .footer__emblem svg {
+  width: var(--icon-lg);
+  height: var(--icon-lg);
+}
+
+.footer--legacy .footer__name {
+  font-family: var(--font-serif);
+  font-size: var(--text-h3);
+}
+
+.footer--legacy .footer__tagline {
+  margin-top: var(--space-2);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--text-body-sm);
+  color: rgb(255 255 255 / 70%);
+}
+
+.footer--legacy .footer__contact {
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-4) var(--space-6);
+  margin-top: var(--space-6);
+  line-height: inherit;
+  color: rgb(255 255 255 / 60%);
+}
+
+.footer--legacy .footer__contact a:hover {
+  color: var(--color-highlight);
+}
+
+.footer--legacy .footer__contact-item {
+  align-items: center;
+  gap: var(--space-2);
+  max-width: none;
+}
+
+.footer--legacy .footer__contact-item svg {
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+  margin-top: 0;
+}
+
+@media (max-width: 767px) {
+  .footer--legacy .footer__contact {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer--legacy .footer__contact-item {
+    align-items: flex-start;
+    max-width: 32ch;
+    text-align: left;
+  }
+
+  .footer--legacy .footer__contact-item svg {
+    margin-top: 0.3em;
+  }
+}
+
+.footer--legacy .footer__socials {
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+.footer--legacy .footer__social {
+  border-color: rgb(255 255 255 / 20%);
+  color: rgb(255 255 255 / 70%);
+}
+
+.footer--legacy .footer__social:hover {
+  background: transparent;
+  border-color: var(--color-highlight);
+  color: var(--color-highlight);
+}
+
+.footer--legacy .footer__columns {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-12);
+  margin-bottom: var(--space-16);
+}
+
+@media (min-width: 768px) {
+  .footer--legacy .footer__columns {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .footer--legacy .footer__columns {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.footer--legacy .footer__heading {
+  font-weight: 700;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--color-highlight);
+}
+
+.footer--legacy .footer__list {
+  font-weight: 300;
+  color: rgb(255 255 255 / 60%);
+}
+
+.footer--legacy .footer__list a {
+  min-height: var(--control-min);
+}
+
+.footer--legacy .footer__bottom {
+  align-items: center;
+  border-top-color: rgb(255 255 255 / 10%);
+  font-size: var(--text-body-sm);
+  color: rgb(255 255 255 / 50%);
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .footer--legacy .footer__bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+}
+
+.footer.footer--legacy .lang__link {
+  color: rgb(255 255 255 / 70%);
+}
+
+.footer.footer--legacy .lang__link.is-active {
+  background: rgb(255 255 255 / 12%);
+}
+
+/* Chapter bodies link to their venue page. */
+.chapter__actions {
+  margin-top: var(--space-6);
+}
+
+/* "View all" rows under the room panel and the FAQ list. */
+.rooms__more,
+.faq__more {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-8);
+}
+
+@media (max-width: 639px) {
+  .rooms__more .button,
+  .faq__more .button {
+    flex: 1 1 auto;
+  }
+}
+
+/* ---------- Room slider (home) ----------
+   Compact teaser cards in a scroll-snap track that bleeds to the viewport,
+   first card aligned with the section head. Specs and amenities stay on the
+   room pages; this only has to make each stay look worth clicking. */
+.rooms--slider .section-head--row {
+  margin-bottom: var(--space-12);
+}
+
+.room-slider {
+  --slider-inset: max(var(--gutter), calc((100% - var(--content-width)) / 2 + var(--gutter)));
+  width: 100%;
+}
+
+.room-slider__viewport {
+  position: relative;
+}
+
+.room-slider__track {
+  display: flex;
+  gap: var(--space-6);
+  padding-inline: var(--slider-inset);
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--slider-inset);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.room-slider__track::-webkit-scrollbar {
+  display: none;
+}
+
+/* Card widths leave the next card peeking at every breakpoint so the track
+   reads as a slider even with three rooms. */
+.room-slide {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 82%;
+  scroll-snap-align: start;
+}
+
+@media (min-width: 640px) {
+  .room-slide {
+    flex-basis: 62%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .room-slide {
+    flex-basis: calc((100% - var(--space-6)) / 1.75);
+  }
+}
+
+.room-slide__media {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--color-surface);
+}
+
+.room-slide__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--dur-zoom) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .room-slide:hover .room-slide__media img {
+    transform: scale(var(--zoom-scale));
+  }
+}
+
+.room-slide__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding-top: var(--space-6);
+}
+
+.room-slide__kicker {
+  display: block;
+  margin-bottom: var(--space-3);
+  font-size: var(--text-caption);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-weight: 600;
+  color: var(--color-soft);
+}
+
+.room-slide__title {
+  margin-bottom: var(--space-3);
+  font-size: var(--text-h4);
+  color: var(--color-ink);
+}
+
+.room-slide__title a {
+  color: inherit;
+  transition: color 0.3s;
+}
+
+.room-slide__title a:hover {
+  color: var(--color-highlight-text);
+}
+
+.room-slide__text {
+  font-size: var(--text-body-sm);
+  line-height: 1.7;
+  color: var(--color-muted);
+}
+
+.room-slide .card__link {
+  padding-top: var(--space-5);
+}
+
+/* Arrows over the photo, centred on its height. The wrapper spans the track
+   content width and takes the media's aspect ratio scaled by the card basis
+   (1 / (basis * 3/4)), so its vertical centre is the photo's centre without
+   measuring. Phones swipe; arrows only appear from tablet up. */
+.room-slider__arrows {
+  position: absolute;
+  top: 0;
+  left: max(var(--space-4), calc(var(--slider-inset) - var(--space-4)));
+  right: max(var(--space-4), calc(var(--slider-inset) - var(--space-4)));
+  z-index: 20;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  aspect-ratio: 2.15;
+  pointer-events: none;
+}
+
+@media (min-width: 768px) {
+  .room-slider__arrows {
+    display: flex;
+  }
+}
+
+@media (min-width: 1024px) {
+  .room-slider__arrows {
+    aspect-ratio: 2.33;
+  }
+}
+
+.room-slider__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--control-min);
+  height: var(--control-min);
+  background: rgb(255 255 255 / 90%);
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  color: var(--color-ink);
+  backdrop-filter: blur(4px);
+  pointer-events: auto;
+  transition: background-color 0.3s, opacity 0.3s;
+}
+
+.room-slider__arrow[hidden] {
+  display: none;
+}
+
+.room-slider__arrow:hover {
+  background: var(--color-card);
+}
+
+.room-slider__arrow:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.room-slider__arrow svg {
+  width: var(--icon-md);
+  height: var(--icon-md);
+}
+
+/* Counter + hairline progress under the track: the phone's only cue that
+   more rooms sit off-screen. */
+.room-slider__foot {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  margin: var(--space-8) var(--slider-inset) 0;
+}
+
+.room-slider__count {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  flex-shrink: 0;
+  font-family: var(--font-ui);
+  font-size: var(--text-label);
+  font-weight: 500;
+  font-feature-settings: "tnum" 1;
+  color: var(--color-ink);
+}
+
+.room-slider__count-sep,
+.room-slider__count [data-slider-total] {
+  color: var(--color-soft);
+}
+
+.room-slider__progress {
+  position: relative;
+  flex: 1;
+  max-width: 16rem;
+  height: 1px;
+  background: var(--color-line);
+}
+
+.room-slider__progress-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 33.333%;
+  background: var(--color-highlight);
+  transition: width 300ms var(--ease-out);
+}
+
+/* Lucide icon sizing */
+.button svg {
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+}
+
+/* ============================================================================
+   Phase 2 — shared components introduced for the multi-page site
+   (home.html and the pages listed in IMPLEMENTATION-PLAN.md).
+   ========================================================================= */
+
+/* ---------- Section header: split row (title left, action right) ---------- */
+.section-head--row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  align-items: flex-start;
+}
+
+@media (min-width: 768px) {
+  .section-head--row {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+}
+
+.section-head__actions {
+  flex-shrink: 0;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .section-head__actions {
+    width: auto;
+  }
+}
+
+.section-head__actions .button {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .section-head__actions .button {
+    width: auto;
+  }
+}
+
+/* ---------- Hero actions (Book Now + secondary link) ---------- */
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+  width: 100%;
+}
+
+.hero__actions .button {
+  flex: 1 1 auto;
+  min-width: clamp(11rem, 12.2222vw, 19.5556rem); /* 176px */
+}
+
+@media (min-width: 640px) {
+  .hero__actions .button {
+    flex: 0 0 auto;
+  }
+}
+
+/* Hero link that reads as text over the photo, not a filled control. */
+.button--ghost {
+  background: transparent;
+  border-color: rgb(255 255 255 / 45%);
+  color: var(--color-inverse);
+}
+
+.button--ghost:hover {
+  background: rgb(255 255 255 / 12%);
+  border-color: var(--color-inverse);
+}
+
+/* ---------- Language switcher (EN / ID) ---------- */
+.lang {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+}
+
+.lang__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--control-min);
+  min-height: var(--control-min);
+  padding: var(--space-1) var(--space-2);
+  border-radius: 999px;
+  color: rgb(255 255 255 / 70%);
+  transition: color 0.3s, background-color 0.3s;
+}
+
+.lang__link:hover {
+  color: var(--color-inverse);
+}
+
+.lang__link.is-active {
+  background: rgb(255 255 255 / 15%);
+  color: var(--color-inverse);
+}
+
+.header.is-scrolled .lang__link {
+  color: var(--color-muted);
+}
+
+.header.is-scrolled .lang__link:hover {
+  color: var(--color-ink);
+}
+
+.header.is-scrolled .lang__link.is-active {
+  background: var(--color-surface);
+  color: var(--color-ink);
+}
+
+/* The bar keeps EN / ID visible at every width, so the copy inside the
+   mobile menu would only repeat it. */
+.mobile-menu .lang {
+  display: none;
+}
+
+/* Logo, EN / ID and the hamburger share a 320px bar: tighten the gaps and
+   drop the logo a step so nothing overflows. */
+@media (max-width: 479px) {
+  .header__actions {
+    gap: var(--space-2);
+  }
+
+  .header__lang {
+    gap: 0;
+  }
+
+  .header__logo {
+    height: 60px;
+  }
+}
+
+/* Same switcher on light surfaces (mobile menu, footer). */
+.lang--light .lang__link {
+  color: var(--color-muted);
+}
+
+.lang--light .lang__link:hover {
+  color: var(--color-ink);
+}
+
+.lang--light .lang__link.is-active {
+  background: var(--color-surface);
+  color: var(--color-ink);
+}
+
+/* Footer sits on brand teal; reuse the on-dark colours at 75% for contrast. */
+.footer .lang__link {
+  color: rgb(255 255 255 / 75%);
+}
+
+.footer .lang__link.is-active {
+  background: rgb(255 255 255 / 15%);
+  color: var(--color-inverse);
+}
+
+/* ---------- Card grid ---------- */
+.card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 640px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .card-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .card-grid--2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ---------- Card (media + body); rooms, offers, experiences, articles ---------- */
+.card {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-card);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  transition: border-color 0.3s;
+}
+
+.card:hover,
+.card:focus-within {
+  border-color: var(--color-highlight);
+}
+
+.card__media {
+  position: relative;
+  height: var(--media-h-sm);
+  overflow: hidden;
+}
+
+.card--tall .card__media {
+  height: var(--media-h-md);
+}
+
+.card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--dur-zoom) var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card:hover .card__media img {
+    transform: scale(var(--zoom-scale));
+  }
+}
+
+.card__badges {
+  position: absolute;
+  top: var(--space-4);
+  left: var(--space-4);
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: var(--space-6);
+  text-align: left;
+}
+
+.card__kicker {
+  display: block;
+  font-size: var(--text-caption);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  font-weight: 700;
+  color: var(--color-soft);
+}
+
+.card__title {
+  margin-block: var(--space-2) var(--space-3);
+  font-size: var(--text-h4);
+  color: var(--color-ink);
+}
+
+.card__title a {
+  color: inherit;
+}
+
+.card__tagline {
+  margin-top: calc(-1 * var(--space-2));
+  margin-bottom: var(--space-3);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--text-body-sm);
+  color: var(--color-highlight-text);
+}
+
+.card__text {
+  font-size: var(--text-body-sm);
+  line-height: 1.7;
+  color: var(--color-muted);
+}
+
+.card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  margin-top: var(--space-4);
+  font-size: var(--text-caption);
+  font-weight: 500;
+  color: var(--color-soft);
+}
+
+.card__meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.card__meta svg {
+  flex-shrink: 0;
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+  color: var(--color-soft);
+}
+
+.card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: auto;
+  padding-top: var(--space-6);
+}
+
+.card__actions .button {
+  flex: 1 1 auto;
+}
+
+/* Text link with arrow, used when a card has one destination only. */
+.card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: auto;
+  padding-top: var(--space-6);
+  font-size: var(--text-label);
+  font-weight: 600;
+  color: var(--color-highlight-text);
+  transition: color 0.3s;
+}
+
+.card__link:hover {
+  color: var(--color-ink);
+}
+
+.card__link svg {
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+  transition: transform 200ms var(--ease-out);
+}
+
+.card__link:hover svg {
+  transform: translateX(3px);
+}
+
+/* Pair of text links standing in for a card's button row (e.g. View Offer +
+   Book Now), styled like .card__link but sitting side by side. */
+.card__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-6);
+  margin-top: auto;
+  padding-top: var(--space-6);
+}
+
+.card__links .card__link {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+/* The text is 21px tall on a phone; like the breadcrumb, a pseudo-element
+   grows the hit area to 44px without moving the layout. */
+.card__link {
+  position: relative;
+}
+
+.card__link::after {
+  content: "";
+  position: absolute;
+  inset: calc((var(--control-min) - 100%) / -2) 0;
+}
+
+/* ---------- Card, minimal ----------
+   Clean read for a teaser or listing card: no box/border, bigger image,
+   description below. Used on the home, offers, experiences and spa cards. */
+.card--minimal {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+}
+
+.card--minimal:hover,
+.card--minimal:focus-within {
+  border-color: transparent;
+}
+
+.card--minimal .card__media {
+  height: var(--media-h-md);
+  border-radius: var(--radius-sm);
+}
+
+.card--minimal .card__body {
+  padding: var(--space-6) 0 0;
+}
+
+/* ---------- Amenity, minimal ----------
+   Same clean read as .card--minimal: no box, bigger image. The icon badge
+   is dropped from photographed cards (image speaks for itself) but kept on
+   photo-pending placeholders, where it's the only content standing in for
+   the missing photo. */
+.amenity--minimal {
+  background: transparent;
+  border: none;
+}
+
+.amenity--minimal:hover {
+  border-color: transparent;
+}
+
+.amenity--minimal .amenity__media {
+  height: var(--media-h-md);
+  border-radius: var(--radius-sm);
+}
+
+/* Without the card border, the no-photo placeholder needs its own frame or
+   it blends into the section background (same surface colour). */
+.amenity--minimal .amenity__media--pending {
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+}
+
+.amenity--minimal .amenity__body {
+  padding: var(--space-5) 0 0;
+}
+
+@media (min-width: 768px) {
+  .amenity--minimal {
+    flex-basis: calc((100% - var(--space-5)) / 2);
+  }
+}
+
+/* Arrows recentre on the taller image used by the minimal amenity cards;
+   add this alongside .amenities on the section wrapper. */
+.amenities--minimal .amenities__arrow {
+  top: calc(var(--space-2) + var(--media-h-md) / 2);
+}
+
+/* ---------- Gallery mosaic ---------- */
+.gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: var(--media-h-sm);
+  grid-auto-flow: dense;
+  gap: var(--space-3);
+}
+
+@media (min-width: 768px) {
+  .gallery__grid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: calc(var(--media-h-sm) * 1.2);
+    gap: var(--space-4);
+  }
+}
+
+.gallery__item {
+  position: relative;
+  display: block;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.gallery__item--wide {
+  grid-column: span 2;
+}
+
+@media (min-width: 768px) {
+  .gallery__item--tall {
+    grid-row: span 2;
+  }
+}
+
+.gallery__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--dur-zoom) var(--ease-out);
+}
+
+.gallery__item:focus-visible img {
+  transform: scale(var(--zoom-scale));
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .gallery__item:hover img {
+    transform: scale(var(--zoom-scale));
+  }
+}
+
+.gallery__caption {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: var(--space-4);
+  background: linear-gradient(to top, color-mix(in srgb, var(--color-ink) 70%, transparent), transparent);
+  font-size: var(--text-body-sm);
+  font-weight: 600;
+  text-transform: capitalize;
+  color: var(--color-inverse);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.gallery__item:hover .gallery__caption,
+.gallery__item:focus-visible .gallery__caption {
+  opacity: 1;
+}
+
+/* No hover on touch: keep captions readable. */
+@media (hover: none) {
+  .gallery__caption {
+    opacity: 1;
+  }
+}
+
+/* ---------- Testimonials ---------- */
+.testimonials__track {
+  display: flex;
+  gap: var(--space-5);
+  padding-bottom: var(--space-4);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.testimonials__track::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .testimonials__track {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    overflow: visible;
+  }
+}
+
+.testimonial {
+  display: flex;
+  flex: 0 0 85%;
+  flex-direction: column;
+  scroll-snap-align: start;
+  padding: var(--space-8);
+  background: var(--color-card);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+}
+
+@media (min-width: 640px) {
+  .testimonial {
+    flex-basis: 60%;
+  }
+}
+
+.testimonial__quote {
+  margin-bottom: var(--space-4);
+  color: var(--color-highlight);
+}
+
+.testimonial__quote svg {
+  width: var(--icon-lg);
+  height: var(--icon-lg);
+}
+
+.testimonial__stars {
+  display: flex;
+  gap: var(--space-1);
+  margin-bottom: var(--space-4);
+  color: var(--color-highlight);
+}
+
+.testimonial__stars svg {
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+}
+
+.testimonial__text {
+  margin-bottom: var(--space-6);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--text-body-lg);
+  line-height: 1.7;
+  color: var(--color-ink);
+}
+
+.testimonial__meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin-top: auto;
+  padding-top: var(--space-4);
+  border-top: 1px solid color-mix(in srgb, var(--color-line) 60%, transparent);
+  font-size: var(--text-body-sm);
+  color: var(--color-soft);
+}
+
+.testimonial__meta strong {
+  font-weight: 600;
+  color: var(--color-muted);
+}
+
+/* ---------- Empty state (no published content) ---------- */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-16) var(--space-6);
+  background: var(--color-card);
+  border: 1px dashed var(--color-line);
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+.empty-state[hidden] {
+  display: none;
+}
+
+.empty-state__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--emblem-size);
+  height: var(--emblem-size);
+  margin-bottom: var(--space-2);
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  color: var(--color-highlight);
+}
+
+.empty-state__icon svg {
+  width: var(--icon-lg);
+  height: var(--icon-lg);
+}
+
+.empty-state__title {
+  font-size: var(--text-h4);
+  color: var(--color-ink);
+}
+
+.empty-state__text {
+  max-width: var(--measure-sm);
+  font-size: var(--text-body-sm);
+  color: var(--color-muted);
+}
+
+/* ---------- Locate strip (address, contact, map) ---------- */
+.locate {
+  padding-block: var(--space-24);
+  background: var(--color-surface);
+}
+
+.locate__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-12);
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .locate__grid {
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--space-16);
+  }
+
+  .locate__body {
+    grid-column: span 5;
+  }
+
+  .locate__map {
+    grid-column: span 7;
+  }
+}
+
+.locate__body .section-head {
+  margin-bottom: var(--space-6);
+}
+
+.locate__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-bottom: var(--space-8);
+}
+
+.locate__item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  font-size: var(--text-body-sm);
+  line-height: 1.6;
+  color: var(--color-muted);
+}
+
+.locate__item svg {
+  flex-shrink: 0;
+  width: var(--icon-md);
+  height: var(--icon-md);
+  margin-top: 0.15em;
+  color: var(--color-highlight);
+}
+
+.locate__item a:hover {
+  color: var(--color-highlight-text);
+}
+
+.locate__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.locate__map {
+  position: relative;
+  min-height: var(--media-h-md);
+  background: var(--color-line);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .locate__map {
+    min-height: var(--media-h-lg);
+  }
+}
+
+.locate__map iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Painted under the iframe: visible when the embed is blocked or empty. */
+.locate__map-fallback {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-8);
+  background: var(--color-surface);
+  text-align: center;
+  font-size: var(--text-body-sm);
+  color: var(--color-muted);
+}
+
+.locate__map iframe {
+  z-index: 1;
+}
+
+.locate__map-fallback svg {
+  width: var(--icon-lg);
+  height: var(--icon-lg);
+  color: var(--color-highlight);
+}
+
+.locate__map-fallback strong {
+  font-family: var(--font-serif);
+  font-size: var(--text-body-lg);
+  font-weight: 500;
+  color: var(--color-ink);
+}
+
+/* ---------- Getting Here (centered variant of .locate, map full-width below) ----------
+   Shared by home.html and index.html's #getting-here. The
+   .welcome__actions rule here is self-contained (not just a justify-content
+   override) since about.html has no other .welcome__actions base to build on. */
+.getting-here {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+}
+
+/* Surface variant for pages where the section before it is already bg. */
+.getting-here--surface {
+  background: var(--color-surface);
+}
+
+.getting-here__body {
+  max-width: var(--measure-md);
+  margin-inline: auto;
+  text-align: center;
+}
+
+.getting-here__body .section-head__text {
+  text-align: center;
+}
+
+.getting-here__body .welcome__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-top: var(--space-8);
+}
+
+.getting-here__map {
+  margin-top: var(--space-12);
+}
+
+.getting-here__map-foot {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--space-6);
+}
+
+/* ---------- WhatsApp floating button ---------- */
+.whatsapp-float {
+  position: fixed;
+  right: var(--gutter);
+  bottom: var(--gutter);
+  z-index: 40;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--control-min);
+  padding: var(--space-3) var(--space-5);
+  background: var(--color-whatsapp);
+  border-radius: 999px;
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--color-ink) 25%, transparent);
+  font-size: var(--text-label);
+  font-weight: 600;
+  /* White on WhatsApp green is 2:1; ink is 7:1. */
+  color: var(--color-ink);
+  transition: transform 0.3s var(--ease-out), box-shadow 0.3s;
+}
+
+.whatsapp-float:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px color-mix(in srgb, var(--color-ink) 30%, transparent);
+}
+
+.whatsapp-float[hidden] {
+  display: none;
+}
+
+/* Parked while a section with its own WhatsApp link is on screen (contact
+   hero, footer). Separate classes so the two observers never undo each other. */
+.whatsapp-float.is-parked,
+.whatsapp-float.is-parked-footer {
+  transform: translateY(calc(100% + var(--gutter)));
+  box-shadow: none;
+  pointer-events: none;
+}
+
+.whatsapp-float svg {
+  flex-shrink: 0;
+  width: var(--icon-lg);
+  height: var(--icon-lg);
+}
+
+.whatsapp-float__label {
+  display: none;
+}
+
+/* The labelled pill is wider than the page margin until 1600px and sat on
+   top of right-column text (room At a Glance, lead copy); icon-only below. */
+@media (min-width: 1600px) {
+  .whatsapp-float__label {
+    display: inline;
+  }
+}
+
+@media (max-width: 1599px) {
+  .whatsapp-float {
+    width: calc(var(--control-min) + var(--space-3));
+    height: calc(var(--control-min) + var(--space-3));
+    padding: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .whatsapp-float,
+  .card__link svg,
+  .room__more svg,
+  .card__media img,
+  .chapter__media img,
+  .gallery__item img {
+    transition: none;
+  }
+}
+
+/* ============================================================================
+   Phase 3 — shared components for the inner pages
+   (IMPLEMENTATION-PLAN.md §1). Every block below is documented in
+   components.html; page CSS must not restyle these classes.
+   ========================================================================= */
+
+/* ---------- Page hero (inner pages) ----------
+   Every inner page shares the same 80% viewport height so the hero reads
+   identically from page to page; same keyframes as home at shorter
+   durations so the page reads as arrived, not as a landing. */
+.page-hero {
+  position: relative;
+  display: flex;
+  min-height: 80vh;
+  min-height: 80svh;
+  align-items: flex-end;
+  padding-top: var(--space-24);
+  padding-bottom: var(--space-16);
+  overflow: hidden;
+  color: var(--color-inverse);
+}
+
+.page-hero__media {
+  position: absolute;
+  inset: 0;
+}
+
+.page-hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: hero-zoom 1.2s var(--ease-out) both;
+}
+
+.page-hero__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background:
+    linear-gradient(to top, rgb(0 0 0 / 70%), rgb(0 0 0 / 40%) 50%, rgb(0 0 0 / 15%)),
+    rgb(0 0 0 / 20%);
+}
+
+.page-hero__content {
+  position: relative;
+  z-index: 20;
+  width: 100%;
+  animation: hero-rise 0.8s var(--ease-out) 0.2s both;
+}
+
+.page-hero__breadcrumb {
+  margin-bottom: var(--space-6);
+}
+
+.page-hero__title {
+  max-width: var(--measure-lg);
+  font-size: var(--text-h2);
+  color: var(--color-inverse);
+}
+
+/* Inner-page heroes: plain sans lead under the serif title; the italic serif
+   tagline stays a home-hero device. */
+.page-hero__tagline {
+  max-width: var(--measure-md);
+  margin-top: var(--space-4);
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-size: var(--text-body-lg);
+  color: var(--color-inverse);
+}
+
+/* Article variant: date, category and reading time under the title. */
+.page-hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  margin-top: var(--space-4);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--color-inverse);
+}
+
+/* Category link inside the meta row (article hero). */
+.page-hero__meta a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgb(255 255 255 / 50%);
+  text-underline-offset: 0.2em;
+  transition: text-decoration-color 0.3s;
+}
+
+.page-hero__meta a:hover {
+  text-decoration-color: currentColor;
+}
+
+/* Short variant (404, thin pages): no photo, ink background. */
+.page-hero--short {
+  min-height: clamp(16rem, 32vh, 24rem);
+  background: var(--color-ink);
+}
+
+/* Eyebrow for pages with no breadcrumb path (404 status code). */
+.page-hero__kicker {
+  display: block;
+  margin-bottom: var(--space-4);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--color-highlight);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-hero__media img,
+  .page-hero__content {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* ---------- Breadcrumb ---------- */
+.breadcrumb__list {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--color-inverse);
+}
+
+.breadcrumb__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.breadcrumb__item a {
+  position: relative;
+  transition: color 0.3s;
+}
+
+/* Inline text stays 19px tall; the pseudo-element grows the hit area to 44px. */
+.breadcrumb__item a::after {
+  content: "";
+  position: absolute;
+  inset: calc((var(--control-min) - 100%) / -2) 0;
+}
+
+.breadcrumb__item a:hover {
+  color: var(--color-highlight);
+}
+
+.breadcrumb__item[aria-current="page"] {
+  color: var(--color-inverse);
+}
+
+.breadcrumb__separator {
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+  color: var(--color-highlight);
+}
+
+/* On light surfaces (detail pages without a photo hero). */
+.breadcrumb--light .breadcrumb__list {
+  color: var(--color-soft);
+}
+
+.breadcrumb--light .breadcrumb__item[aria-current="page"] {
+  color: var(--color-ink);
+}
+
+/* ---------- Prose (WordPress rich text) ---------- */
+.prose {
+  max-width: var(--measure-md);
+  font-size: var(--text-body);
+  line-height: var(--line-loose);
+  color: var(--color-muted);
+}
+
+.prose > * + * {
+  margin-top: var(--space-6);
+}
+
+.prose h2,
+.prose h3 {
+  color: var(--color-ink);
+}
+
+.prose h2 {
+  margin-top: var(--space-16);
+  font-size: var(--text-h3);
+}
+
+.prose h3 {
+  margin-top: var(--space-12);
+  font-size: var(--text-h4);
+}
+
+.prose h2 + *,
+.prose h3 + * {
+  margin-top: var(--space-4);
+}
+
+.prose a {
+  color: var(--color-highlight-text);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--color-highlight-text) 40%, transparent);
+  text-underline-offset: 0.15em;
+  transition: text-decoration-color 0.3s;
+}
+
+.prose a:hover {
+  text-decoration-color: currentColor;
+}
+
+.prose strong {
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.prose ul,
+.prose ol {
+  padding-left: var(--space-6);
+}
+
+.prose ul {
+  list-style: none;
+}
+
+.prose ol {
+  list-style: decimal;
+}
+
+.prose li + li {
+  margin-top: var(--space-2);
+}
+
+.prose ul li {
+  position: relative;
+}
+
+.prose ul li::before {
+  content: "";
+  position: absolute;
+  left: calc(-1 * var(--space-6));
+  top: 0.75em;
+  width: var(--dot-sm);
+  height: var(--dot-sm);
+  border-radius: 999px;
+  background: var(--color-highlight);
+}
+
+.prose blockquote {
+  margin-inline: 0;
+  padding-left: var(--space-6);
+  border-left: var(--rule-thick) solid var(--color-highlight);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--text-body-lg);
+  color: var(--color-ink);
+}
+
+.prose blockquote cite {
+  display: block;
+  margin-top: var(--space-3);
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-size: var(--text-caption);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--color-soft);
+}
+
+.prose figure {
+  margin: var(--space-12) 0;
+}
+
+.prose figure img {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+}
+
+.prose figcaption {
+  margin-top: var(--space-3);
+  font-size: var(--text-caption);
+  color: var(--color-soft);
+}
+
+.prose hr {
+  height: 1px;
+  margin-block: var(--space-12);
+  border: 0;
+  background: var(--color-line);
+}
+
+/* ---------- Form (inquiry, filters, newsletter-free) ----------
+   Generalises the booking widget fields: same surface, hairline, sand focus. */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.form__row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 640px) {
+  .form__row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .form__row--3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.form__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.form__label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--color-soft);
+}
+
+.form__label svg {
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+  color: var(--color-highlight);
+}
+
+.form__required {
+  color: var(--color-highlight-text);
+}
+
+.form__input,
+.form__textarea,
+.form__select {
+  width: 100%;
+  min-height: var(--control-min);
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  font: inherit;
+  font-size: var(--text-body-sm);
+  font-weight: 500;
+  color: var(--color-ink);
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+.form__input::placeholder,
+.form__textarea::placeholder {
+  color: var(--color-soft);
+  font-weight: 300;
+}
+
+.form__input:hover,
+.form__textarea:hover,
+.form__select:hover,
+.form__input:focus,
+.form__textarea:focus,
+.form__select:focus {
+  border-color: var(--color-highlight);
+  outline: none;
+}
+
+.form__input:focus-visible,
+.form__textarea:focus-visible,
+.form__select:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.form__textarea {
+  min-height: calc(var(--control-min) * 3);
+  resize: vertical;
+  line-height: var(--line-body);
+}
+
+/* Native select with a custom chevron; keeps keyboard and mobile pickers. */
+.form__select {
+  appearance: none;
+  padding-right: calc(var(--space-4) * 2 + var(--icon-sm));
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2378716c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--space-4) center;
+  background-size: var(--icon-sm);
+  cursor: pointer;
+}
+
+/* Checkbox and radio: custom box, native input kept for a11y. */
+.form__checkbox,
+.form__radio {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  font-size: var(--text-body-sm);
+  color: var(--color-muted);
+  cursor: pointer;
+}
+
+.form__checkbox input,
+.form__radio input {
+  flex-shrink: 0;
+  width: var(--icon-md);
+  height: var(--icon-md);
+  margin: 0.15em 0 0;
+  appearance: none;
+  background: var(--color-surface);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+.form__radio input {
+  border-radius: 999px;
+}
+
+.form__checkbox input:hover,
+.form__radio input:hover {
+  border-color: var(--color-highlight);
+}
+
+.form__checkbox input::before,
+.form__radio input::before {
+  content: "";
+  width: 0.55em;
+  height: 0.55em;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 150ms var(--ease-out), transform 150ms var(--ease-out);
+}
+
+.form__checkbox input::before {
+  background-color: var(--color-inverse);
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+
+.form__radio input::before {
+  border-radius: 999px;
+  background-color: var(--color-inverse);
+}
+
+.form__checkbox input:checked,
+.form__radio input:checked {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.form__checkbox input:checked::before,
+.form__radio input:checked::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.form__checkbox a {
+  color: var(--color-highlight-text);
+  text-decoration: underline;
+}
+
+.form__hint {
+  font-size: var(--text-caption);
+  color: var(--color-soft);
+}
+
+.form__error {
+  font-size: var(--text-caption);
+  font-weight: 600;
+  color: var(--color-error);
+}
+
+.form__error[hidden] {
+  display: none;
+}
+
+/* Validation surfaces only after the first submit attempt (`.is-submitted`),
+   so a blank form does not open covered in red. */
+.form.is-submitted .form__input:invalid,
+.form.is-submitted .form__textarea:invalid,
+.form.is-submitted .form__select:invalid,
+.form__field.is-error .form__input,
+.form__field.is-error .form__textarea,
+.form__field.is-error .form__select {
+  border-color: var(--color-error);
+}
+
+.form__field.is-error .form__label {
+  color: var(--color-error);
+}
+
+.form__field.is-error .form__checkbox input {
+  border-color: var(--color-error);
+}
+
+/* Spam trap: visually gone, still in the DOM for the server check. */
+.form__honeypot {
+  position: absolute;
+  left: -999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.form__actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.form__actions .button {
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .form__actions {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .form__actions .button {
+    width: auto;
+  }
+}
+
+.form__actions .button[aria-busy="true"] {
+  opacity: 0.7;
+  cursor: progress;
+}
+
+.form__status {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  font-size: var(--text-body-sm);
+  font-weight: 500;
+  color: var(--color-ink);
+}
+
+.form__status[hidden] {
+  display: none;
+}
+
+.form__status svg {
+  flex-shrink: 0;
+  width: var(--icon-md);
+  height: var(--icon-md);
+  margin-top: 0.1em;
+}
+
+/* Status copy carries email/WhatsApp links; colour alone would not mark them. */
+.form__status a {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.form__status--success {
+  border-color: var(--color-success);
+  background: color-mix(in srgb, var(--color-success) 8%, transparent);
+  color: var(--color-success);
+}
+
+.form__status--error {
+  border-color: var(--color-error);
+  background: color-mix(in srgb, var(--color-error) 6%, transparent);
+  color: var(--color-error);
+}
+
+/* ---------- Filter bar (chips) ---------- */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4) var(--space-6);
+  margin-bottom: var(--space-12);
+}
+
+.filter-bar__group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.filter-bar__label {
+  font-size: var(--text-caption);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--color-soft);
+}
+
+/* Phone: one scrolling row instead of a three-line stack of chips. */
+@media (max-width: 639px) {
+  .filter-bar__group--scroll {
+    flex: 1 1 100%;
+    min-width: 0;
+    flex-wrap: nowrap;
+    margin-inline: calc(-1 * var(--gutter));
+    padding-inline: var(--gutter);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .filter-bar__group--scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filter-bar__group--scroll .chip {
+    flex-shrink: 0;
+  }
+}
+
+/* Items filtered out by JS: kept in the DOM for SEO, removed from layout. */
+[data-filter-item][hidden] {
+  display: none;
+}
+
+/* ---------- Tabs (experiences categories) ----------
+   Underline tabs on a hairline, same look as the home .room-tab strip.
+   main.js [data-tabs] toggles aria-selected / hidden and handles the arrow
+   keys; panels stay in the DOM. Phones scroll the strip sideways; "safe
+   center" keeps the first tab reachable when it overflows. */
+.tabs__list {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  justify-content: safe center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-12);
+  border-bottom: 1px solid var(--color-line);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.tabs__list::-webkit-scrollbar {
+  display: none;
+}
+
+.tabs__tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  white-space: nowrap;
+  min-height: var(--control-min);
+  padding: var(--space-3) var(--space-5);
+  font-size: var(--text-label);
+  font-weight: 500;
+  color: var(--color-soft);
+  transition: color 0.3s;
+}
+
+/* Phone: tighter tabs so the four categories fit 375px without scrolling. */
+@media (max-width: 639px) {
+  .tabs__tab {
+    padding-inline: var(--space-3);
+  }
+}
+
+.tabs__tab:hover {
+  color: var(--color-ink);
+}
+
+.tabs__tab::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: var(--rule-thick);
+  background: transparent;
+  transition: background-color 200ms var(--ease-out);
+}
+
+.tabs__tab.is-active {
+  color: var(--color-ink);
+}
+
+.tabs__tab.is-active::after {
+  background: var(--color-highlight);
+}
+
+.tabs__panel:focus-visible {
+  outline-offset: var(--space-4);
+}
+
+.tabs__panel[hidden] {
+  display: none;
+}
+
+.tabs__intro {
+  max-width: var(--measure-md);
+  margin: 0 auto var(--space-12);
+  text-align: center;
+  color: var(--color-muted);
+  line-height: 1.6;
+}
+
+/* ---------- Pagination ---------- */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-16);
+}
+
+.pagination__list {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+.pagination__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-width: var(--control-min);
+  min-height: var(--control-min);
+  padding-inline: var(--space-4);
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  font-size: var(--text-label);
+  font-weight: 600;
+  color: var(--color-soft);
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.pagination__link:hover {
+  border-color: var(--color-highlight);
+  color: var(--color-highlight-text);
+}
+
+.pagination__link--current {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-inverse);
+  pointer-events: none;
+}
+
+.pagination__link svg {
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+}
+
+.pagination__prev,
+.pagination__next {
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+}
+
+.pagination__link[aria-disabled="true"] {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.pagination__ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--control-min);
+  color: var(--color-soft);
+}
+
+/* ---------- Detail split (room / offer detail) ----------
+   Static counterpart of the tab-rendered .room: gallery 7 / panel 5, panel
+   sticks while the gallery scrolls on wide screens. */
+.detail {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-12);
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .detail {
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--space-16);
+  }
+
+  .detail__gallery {
+    grid-column: span 7;
+  }
+
+  .detail__panel {
+    grid-column: span 5;
+    position: sticky;
+    top: calc(var(--space-24) + var(--space-8));
+  }
+}
+
+.detail__gallery {
+  display: grid;
+  gap: var(--space-4);
+}
+
+/* min-height off: with aspect-ratio it would widen the frame past the viewport. */
+.detail__gallery .room__frame {
+  min-height: 0;
+  height: auto;
+  aspect-ratio: 3 / 2;
+}
+
+/* Secondary photos sit as a 2-up strip under the lead frame. */
+.detail__strip {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+
+.detail__strip .gallery__item {
+  aspect-ratio: 4 / 3;
+  min-height: 0;
+}
+
+.detail__panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding: var(--space-8);
+  background: var(--color-card);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+}
+
+@media (min-width: 768px) {
+  .detail__panel {
+    padding: var(--space-12);
+  }
+}
+
+/* Panel column is narrow (5/12): the two actions stack at every width so
+   "Ask about this suite" never wraps to two lines beside Book Now. */
+.detail__panel .room__actions {
+  flex-direction: column;
+  margin-top: var(--space-2);
+}
+
+/* ---------- Hours table (opening hours, distances) ---------- */
+.hours {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  border-top: 1px solid var(--color-line);
+}
+
+.hours__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-6);
+  padding-block: var(--space-4);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.hours__row dt {
+  display: flex;
+  flex: 1 1 0;
+  min-width: 0;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-body-sm);
+  font-weight: 500;
+  color: var(--color-ink);
+}
+
+.hours__row dt svg {
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+  color: var(--color-highlight);
+}
+
+.hours__row dd {
+  margin: 0 0 0 auto;
+  font-family: var(--font-serif);
+  font-size: var(--text-body-sm);
+  color: var(--color-muted);
+  text-align: right;
+}
+
+.hours__note {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: var(--text-caption);
+  color: var(--color-soft);
+}
+
+/* Dark surfaces (info band, footer). */
+.hours--dark {
+  border-color: rgb(255 255 255 / 12%);
+}
+
+.hours--dark .hours__row {
+  border-color: rgb(255 255 255 / 12%);
+}
+
+.hours--dark .hours__row dt {
+  color: var(--color-inverse);
+}
+
+.hours--dark .hours__row dd {
+  color: rgb(255 255 255 / 70%);
+}
+
+/* ---------- Steps (transfer, how to redeem) ----------
+   Ordered list with a serif numeral and a hairline connector. */
+.steps {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.steps__item {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--control-min) 1fr;
+  gap: var(--space-5);
+  padding-bottom: var(--space-8);
+}
+
+.steps__item:last-child {
+  padding-bottom: 0;
+}
+
+/* Connector between numerals; hidden on the last step. */
+.steps__item:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--control-min) / 2);
+  top: var(--control-min);
+  bottom: 0;
+  width: 1px;
+  background: var(--color-line);
+}
+
+/* Serif numeral, no circle: the number is editorial, the hairline does the
+   ordering. Width matches --control-min so the connector stays centred. */
+.steps__number {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: var(--control-min);
+  height: var(--control-min);
+  font-family: var(--font-serif);
+  font-size: var(--text-h3);
+  font-variant-numeric: lining-nums;
+  line-height: 1;
+  color: var(--color-highlight-text);
+}
+
+.steps__body {
+  min-width: 0;
+  padding-top: calc((var(--control-min) - 1.5em) / 2);
+}
+
+.steps__title {
+  font-size: var(--text-h4);
+  color: var(--color-ink);
+}
+
+.steps__text {
+  max-width: var(--measure-sm);
+  margin-top: var(--space-2);
+  font-size: var(--text-body-sm);
+  line-height: var(--line-body);
+  color: var(--color-muted);
+}
+
+/* ---------- Social links (light surfaces) ----------
+   Same 44px pills as .footer__social, tuned for bg / surface backgrounds. */
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.social-links__link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--control-min);
+  height: var(--control-min);
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  color: var(--color-muted);
+  transition: border-color 0.3s, color 0.3s;
+}
+
+.social-links__link:hover {
+  border-color: var(--color-highlight);
+  color: var(--color-highlight-text);
+}
+
+.social-links__link svg {
+  width: var(--icon-md);
+  height: var(--icon-md);
+}
+
+/* ---------- Menu list (restaurant menu, spa treatments) ---------- */
+.menu-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-12) var(--space-16);
+}
+
+@media (min-width: 1024px) {
+  .menu-list--2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.menu-list__group {
+  min-width: 0;
+}
+
+.menu-list__heading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+  font-size: var(--text-h4);
+  color: var(--color-ink);
+}
+
+.menu-list__heading::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--color-line);
+}
+
+.menu-list__items {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-list__item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "name price"
+    "desc price";
+  column-gap: var(--space-6);
+  row-gap: var(--space-1);
+  padding-block: var(--space-4);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.menu-list__item:last-child {
+  border-bottom: 0;
+}
+
+.menu-list__name {
+  grid-area: name;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-2) var(--space-3);
+  font-family: var(--font-serif);
+  font-size: var(--text-body-lg);
+  color: var(--color-ink);
+}
+
+.menu-list__duration {
+  font-family: var(--font-sans);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--color-soft);
+}
+
+/* Visible placeholder label above a sample menu (R-38); WordPress drops it once
+   the real menu is published. */
+.menu-list__note {
+  max-width: var(--measure-md);
+  margin: 0 0 var(--space-8);
+  padding-left: var(--space-4);
+  border-left: var(--rule-thick) solid var(--color-highlight);
+  font-size: var(--text-body-sm);
+  font-style: italic;
+  color: var(--color-soft);
+}
+
+.menu-list__desc {
+  grid-area: desc;
+  font-size: var(--text-body-sm);
+  line-height: var(--line-body);
+  color: var(--color-muted);
+}
+
+.menu-list__price {
+  grid-area: price;
+  align-self: start;
+  font-family: var(--font-serif);
+  font-size: var(--text-body);
+  color: var(--color-highlight-text);
+  white-space: nowrap;
+}
+
+/* Vegetarian / spicy / signature markers next to the name. */
+.menu-list__badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0 var(--space-2);
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  color: var(--color-soft);
+}
+
+/* ---------- Generic slider (testimonials, gallery strip) ----------
+   Reuses the amenities geometry; JS wires [data-slider-prev/next] to
+   [data-slider-track]. Track children set their own flex-basis. */
+.slider {
+  position: relative;
+}
+
+.slider__track {
+  display: flex;
+  gap: var(--space-5);
+  padding-bottom: var(--space-4);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.slider__track::-webkit-scrollbar {
+  display: none;
+}
+
+.slider__track > * {
+  flex: 0 0 85%;
+  scroll-snap-align: start;
+}
+
+@media (min-width: 640px) {
+  .slider__track > * {
+    flex-basis: 60%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .slider__track > * {
+    flex-basis: calc((100% - 2 * var(--space-5)) / 3);
+  }
+}
+
+.slider__arrows {
+  display: none;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .slider__arrows {
+    display: flex;
+  }
+}
+
+.slider__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--control-min);
+  height: var(--control-min);
+  background: var(--color-card);
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  color: var(--color-ink);
+  transition: border-color 0.3s, color 0.3s, opacity 0.3s;
+}
+
+.slider__arrow:hover {
+  border-color: var(--color-highlight);
+  color: var(--color-highlight-text);
+}
+
+.slider__arrow:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.slider__arrow svg {
+  width: var(--icon-md);
+  height: var(--icon-md);
+}
+
+/* ---------- Lightbox (<dialog>) ----------
+   Progressive: without JS the gallery item is a plain link to the image. */
+.lightbox {
+  width: min(100vw, var(--layout-max));
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: color-mix(in srgb, var(--color-ink) 96%, transparent);
+  color: var(--color-inverse);
+}
+
+.lightbox::backdrop {
+  background: color-mix(in srgb, var(--color-ink) 80%, transparent);
+  backdrop-filter: blur(6px);
+}
+
+.lightbox[open] {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  animation: lightbox-in 250ms var(--ease-out) both;
+}
+
+@keyframes lightbox-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.lightbox__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--gutter);
+}
+
+.lightbox__count {
+  font-size: var(--text-caption);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: rgb(255 255 255 / 70%);
+}
+
+.lightbox__figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  margin: 0;
+  padding-inline: var(--gutter);
+}
+
+.lightbox__figure img {
+  max-width: 100%;
+  max-height: calc(100dvh - var(--space-24) * 2);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  transition: opacity 200ms var(--ease-out);
+}
+
+.lightbox__figure img.is-loading {
+  opacity: 0;
+}
+
+.lightbox__caption {
+  margin-top: var(--space-4);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--text-body-sm);
+  text-align: center;
+  color: rgb(255 255 255 / 80%);
+}
+
+.lightbox__nav {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--gutter) var(--space-8);
+}
+
+.lightbox__close,
+.lightbox__prev,
+.lightbox__next {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--control-min);
+  height: var(--control-min);
+  border: 1px solid rgb(255 255 255 / 30%);
+  border-radius: 999px;
+  color: var(--color-inverse);
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+.lightbox__close:hover,
+.lightbox__prev:hover,
+.lightbox__next:hover {
+  border-color: var(--color-highlight);
+  background: rgb(255 255 255 / 8%);
+}
+
+.lightbox__close svg,
+.lightbox__prev svg,
+.lightbox__next svg {
+  width: var(--icon-md);
+  height: var(--icon-md);
+}
+
+.lightbox :focus-visible {
+  outline-color: var(--color-highlight);
+}
+
+/* Prev/next float over the photo when there is room. */
+@media (min-width: 1024px) {
+  .lightbox__nav {
+    position: absolute;
+    inset: 50% var(--gutter) auto;
+    transform: translateY(-50%);
+    justify-content: space-between;
+    padding: 0;
+    pointer-events: none;
+  }
+
+  .lightbox__nav > * {
+    pointer-events: auto;
+  }
+}
+
+/* Page behind a modal must not scroll. */
+body:has(.lightbox[open]) {
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lightbox[open] {
+    animation: none;
+  }
+
+  .lightbox__figure img {
+    transition: none;
+  }
+}
+
+/* ---------- Notice (page-level message) ---------- */
+.notice {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  max-width: var(--measure-md);
+  padding: var(--space-5) var(--space-6);
+  background: var(--color-card);
+  border: 1px solid var(--color-line);
+  border-left-width: var(--rule-thick);
+  border-radius: var(--radius-md);
+  font-size: var(--text-body-sm);
+  color: var(--color-muted);
+}
+
+.notice[hidden] {
+  display: none;
+}
+
+.notice__icon {
+  flex-shrink: 0;
+  width: var(--icon-md);
+  height: var(--icon-md);
+  margin-top: 0.15em;
+  color: var(--color-highlight);
+}
+
+.notice__title {
+  display: block;
+  margin-bottom: var(--space-1);
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.notice--info {
+  border-left-color: var(--color-highlight);
+}
+
+.notice--success {
+  border-left-color: var(--color-success);
+}
+
+.notice--success .notice__icon,
+.notice--success .notice__title {
+  color: var(--color-success);
+}
+
+.notice--error {
+  border-left-color: var(--color-error);
+}
+
+.notice--error .notice__icon,
+.notice--error .notice__title {
+  color: var(--color-error);
+}
+
+/* ---------- Story (about #story) ----------
+   Label in the narrow left track, statement + two text columns in the wide
+   right track; the photo pair below reuses the same 5 / 7 split so the large
+   photo lines up under the text, both bottom-aligned. Section padding and
+   background stay in each page's shell class. */
+.story__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+}
+
+/* Label is a <p> on about and an <h2> on dining, statement the reverse, so
+   both pin their font rather than inherit the element defaults. */
+.story__label {
+  font-family: var(--font-sans);
+  font-size: var(--text-body-lg);
+  line-height: 1.6;
+  color: var(--color-ink);
+}
+
+.story__title {
+  font-family: var(--font-serif);
+  font-size: var(--text-h3);
+  line-height: 1.2;
+  color: var(--color-ink);
+}
+
+.story__accent {
+  color: var(--color-highlight-text);
+}
+
+.story__columns {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  margin-top: var(--space-12);
+}
+
+.story__text {
+  font-size: var(--text-body);
+  line-height: 1.7;
+  color: var(--color-muted);
+}
+
+.story__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-6);
+  margin-top: var(--space-10);
+}
+
+.story__meta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-body-sm);
+  color: var(--color-muted);
+}
+
+.story__meta svg {
+  flex-shrink: 0;
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+  color: var(--color-highlight-text);
+}
+
+.story__media {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+}
+
+.story__figure {
+  min-width: 0;
+  margin: 0;
+  overflow: hidden; /* fallback for browsers without overflow: clip */
+  overflow: clip; /* see Scroll parallax */
+  border-radius: var(--radius-sm);
+}
+
+.story__figure--sm {
+  aspect-ratio: 5 / 4;
+}
+
+.story__figure--lg {
+  aspect-ratio: 4 / 3;
+}
+
+@media (min-width: 768px) {
+  .story__columns {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+  }
+}
+
+@media (min-width: 1024px) {
+  .story__grid,
+  .story__media {
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: var(--space-8);
+  }
+
+  .story__label {
+    grid-column: 1 / span 4;
+  }
+
+  .story__body {
+    grid-column: 6 / -1;
+  }
+
+  .story__title {
+    text-indent: 2em;
+  }
+
+  .story__media {
+    grid-column: 1 / -1;
+    align-items: end;
+    margin-top: var(--space-16);
+  }
+
+  .story__figure--sm {
+    grid-column: 1 / span 5;
+  }
+
+  .story__figure--lg {
+    grid-column: 6 / -1;
+  }
+}
+
+/* ---------- Venue intro (dining #punna, spa #overview) ----------
+   Editorial spread shared by the venue overviews: statement beside the lead
+   paragraph, one wide photo across the container, then the closing
+   paragraph beside the opening hours. Nothing overlaps; phones stack in
+   source order (statement, photo, lead, close, hours). The photo keeps
+   .story__figure for the shared radius and scroll parallax; section padding,
+   background and the photo crop stay in each page's shell. */
+.venue-intro__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+}
+
+.venue-intro__figure {
+  aspect-ratio: 4 / 3;
+}
+
+.venue-intro__label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin: 0 0 var(--space-6);
+  font-family: var(--font-sans);
+  font-size: var(--text-label);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--color-highlight-text);
+}
+
+.venue-intro__label::before {
+  content: "";
+  flex: 0 0 var(--space-12);
+  height: 1px;
+  background: currentColor;
+}
+
+.venue-intro__title {
+  max-width: 22ch;
+  margin: 0;
+  font-family: var(--font-serif);
+  font-size: var(--text-h2);
+  line-height: 1.15;
+  color: var(--color-ink);
+}
+
+.venue-intro__text {
+  max-width: var(--measure-md);
+  margin: 0;
+}
+
+/* Hours as a small fact block: caps label over a serif time. */
+.venue-intro__hours {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  column-gap: var(--space-3);
+  row-gap: var(--space-1);
+  margin: 0;
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-line);
+}
+
+.venue-intro__hours svg {
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+  color: var(--color-highlight-text);
+}
+
+.venue-intro__hours-label {
+  font-size: var(--text-caption);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--color-soft);
+}
+
+.venue-intro__hours-time {
+  grid-column: 1 / -1;
+  font-family: var(--font-serif);
+  font-size: var(--text-h4);
+  line-height: var(--line-tight);
+  color: var(--color-ink);
+}
+
+/* Tablet: wide photo, the two paragraphs side by side under it. */
+@media (min-width: 768px) {
+  .venue-intro__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--space-10);
+  }
+
+  .venue-intro__head,
+  .venue-intro__figure,
+  .venue-intro__grid > .venue-intro__hours {
+    grid-column: 1 / -1;
+  }
+
+  .venue-intro__head {
+    margin-bottom: var(--space-4);
+  }
+
+  .venue-intro__figure {
+    aspect-ratio: 16 / 9;
+  }
+
+  .venue-intro__grid > .venue-intro__hours {
+    justify-self: start;
+    min-width: 16rem;
+  }
+}
+
+/* Desktop: 12 columns. Lead paragraph beside the statement so the top row
+   has no empty half; the photo runs the full container as a cinematic band;
+   below it the sides swap (closing paragraph left, hours right), so the
+   text zigzags around the photo. The hours sit on the paragraph's last
+   line, which keeps a long closing paragraph from leaving a hole under
+   them. */
+@media (min-width: 1024px) {
+  .venue-intro__grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: var(--space-8);
+    row-gap: var(--space-16);
+  }
+
+  .venue-intro__head {
+    grid-column: 1 / span 7;
+    grid-row: 1;
+    margin-bottom: 0;
+  }
+
+  .venue-intro__title {
+    max-width: none;
+  }
+
+  .venue-intro__text--lead {
+    grid-column: 9 / -1;
+    grid-row: 1;
+    align-self: end;
+  }
+
+  .venue-intro__figure {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    aspect-ratio: 21 / 9;
+  }
+
+  .venue-intro__text--close {
+    grid-column: 1 / span 6;
+    grid-row: 3;
+  }
+
+  .venue-intro__grid > .venue-intro__hours {
+    grid-column: 9 / -1;
+    grid-row: 3;
+    align-self: end;
+    justify-self: stretch;
+    min-width: 0;
+  }
+}
+
+/* ---------- Brand band (about #philosophy, dining #experience) ----------
+   One brand-teal band per page, same surface as the footer, for a short
+   section with a few points. Text steps on teal-700: sand-50 7.5:1 for
+   titles, sand-200 5.8:1 for body and kicker. Padding and inner layout stay
+   in each page's shell. */
+.band-brand {
+  background: var(--color-brand);
+  color: var(--sand-50);
+}
+
+.band-brand :focus-visible {
+  outline-color: var(--color-inverse);
+}
+
+.band-brand .section-head__kicker,
+.band-brand .section-head__text {
+  color: var(--sand-200);
+}
+
+.band-brand .section-head__title {
+  color: var(--sand-50);
+}
+
+/* ---------- Split deck (dining #sukha, experiences #wedding-chapel) ----------
+   Full-bleed split: the copy panel carries one equal padding on all four
+   sides and centres its content; the photo runs to the right edge of the
+   viewport and fills one screen height at >=1024px. When
+   the copy runs taller than the screen (short laptops, vw-scaled type on
+   wide ones) the photo stays pinned at one screen while the panel scrolls. */
+.split-deck {
+  display: grid;
+  grid-template-columns: 1fr;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  scroll-margin-top: 0;
+}
+
+.split-deck__media {
+  /* Containing block for the absolute parallax image below 1024px, where the
+     frame is not sticky yet; without it the image escapes the clip and
+     paints over the sections above. */
+  position: relative;
+  order: -1;
+  height: 70svh;
+  min-height: 22rem;
+  overflow: hidden; /* fallback for browsers without overflow: clip */
+  overflow: clip; /* parallax, see components.css Scroll parallax */
+}
+
+.split-deck__panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  padding: var(--space-16) var(--gutter);
+}
+
+.split-deck__meta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-body-sm);
+  color: var(--color-muted);
+}
+
+.split-deck__meta svg {
+  flex-shrink: 0;
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+  color: var(--color-highlight-text);
+}
+
+.split-deck__title {
+  font-size: var(--text-h3);
+  line-height: var(--line-tight);
+  color: var(--color-ink);
+}
+
+.split-deck__tagline {
+  margin-top: var(--space-3);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--text-body-lg);
+  color: var(--color-highlight-text);
+}
+
+.split-deck__text {
+  margin-top: var(--space-6);
+  font-size: var(--text-body-sm);
+  line-height: var(--line-body);
+  color: var(--color-muted);
+}
+
+.split-deck__text + .split-deck__text {
+  margin-top: var(--space-4);
+}
+
+@media (min-width: 1024px) {
+  .split-deck {
+    grid-template-columns: 9fr 11fr;
+    min-height: 100svh;
+  }
+
+  .split-deck__media {
+    position: sticky;
+    top: 0;
+    order: 0;
+    align-self: start;
+    height: 100svh;
+    min-height: 0;
+  }
+
+  /* Same padding on all four sides (90px at 1440, clears the ~76px fixed
+     header), content centred both ways inside it. */
+  .split-deck__panel {
+    justify-content: center;
+    padding: var(--space-24);
+  }
+}
+
+/* Narrow laptops: the 45% panel is ~460px, so 90px a side squeezes the copy
+   past one screen; drop to 48px, still equal on all four sides. */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .split-deck__panel {
+    padding: var(--space-16);
+  }
+}
+
+/* ---------- Reduced motion for every Phase 3 transition ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .breadcrumb__item a,
+  .page-hero__meta a,
+  .prose a,
+  .form__input,
+  .form__textarea,
+  .form__select,
+  .form__checkbox input,
+  .form__radio input,
+  .form__checkbox input::before,
+  .form__radio input::before,
+  .pagination__link,
+  .slider__arrow,
+  .lightbox__close,
+  .lightbox__prev,
+  .lightbox__next {
+    transition: none;
+  }
+}
+
+/* ---------- Scroll parallax ----------
+   Every large editorial photo drifts the same way on every page: chapters,
+   the story figures (dining, spa, about), the room story, the Sukha deck, the
+   contact directions photo and the closing photo band. The image is 140% of its frame with 20% overscan
+   top and bottom, and travels ±--parallax-shift of its own height as the
+   frame crosses the viewport, so no edge ever shows. Frames crop with
+   overflow: clip; overflow: hidden would make the frame a scroll container
+   and view() would track it instead of the page. Scroll-linked, not timed:
+   browsers without animation-timeline, and reduced motion, get the photo
+   filling its frame, still. Kept last in this file so it wins over the
+   frames' own img rules; page stylesheets leave img height to this block. */
+:is(.chapter__media, .story__figure, .room-story__media, .split-deck__media, .cta-photo__media, .directions__media) > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* The deck (relative, sticky from 1024px) and the photo band (absolute)
+       are positioned already. */
+    :is(.chapter__media, .story__figure, .room-story__media, .directions__media) {
+      position: relative;
+    }
+
+    /* Absolute, so the taller image never sizes its frame: an aspect-ratio
+       frame would otherwise grow to fit it (and widen with it). */
+    :is(.chapter__media, .story__figure, .room-story__media, .split-deck__media, .cta-photo__media, .directions__media) > img {
+      position: absolute;
+      inset: -20% 0 auto;
+      height: 140%;
+      animation: media-parallax linear both;
+      animation-timeline: view(block);
+      animation-range: cover 0% cover 100%;
+    }
+  }
+}
+
+@keyframes media-parallax {
+  from {
+    transform: translateY(calc(-1 * var(--parallax-shift)));
+  }
+  to {
+    transform: translateY(var(--parallax-shift));
+  }
+}

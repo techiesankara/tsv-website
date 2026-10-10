@@ -1,0 +1,127 @@
+/* Dining page — section shells only; components live in components.css. */
+
+/* ---------- Puṇṇa overview ---------- */
+.dining-intro {
+  padding-block: var(--space-24);
+  background: var(--color-surface);
+}
+
+/* Layout and type are the shared .venue-intro (components.css). The wide
+   band crops top and bottom; keep a strip of the timber ceiling above the
+   tables. */
+.dining-intro .venue-intro__figure img {
+  object-position: center 45%;
+}
+
+/* ---------- A day at Puṇṇa (three services, text only) ----------
+   The page's brand-teal band (components.css .band-brand): centred head,
+   three services split by hairlines, same shape as about #philosophy. */
+.dining-day {
+  padding-block: var(--space-24);
+}
+
+.dining-day__list {
+  display: grid;
+  grid-template-columns: 1fr;
+  margin: var(--space-4) 0 0;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+}
+
+.dining-day__item {
+  padding-block: var(--space-8);
+}
+
+.dining-day__item + .dining-day__item {
+  border-top: 1px solid rgb(255 253 241 / 20%);
+}
+
+.dining-day__title {
+  margin: 0 0 var(--space-3);
+  font-size: var(--text-h4);
+  font-weight: 300;
+  line-height: var(--line-tight);
+  color: var(--sand-50);
+}
+
+.dining-day__text {
+  max-width: 30ch;
+  margin: 0 auto;
+  font-size: var(--text-body-sm);
+  line-height: var(--line-body);
+  color: var(--sand-200);
+}
+
+@media (min-width: 768px) {
+  .dining-day__list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .dining-day__item {
+    padding: var(--space-4) var(--space-8);
+  }
+
+  .dining-day__item + .dining-day__item {
+    border-top: 0;
+    border-left: 1px solid rgb(255 253 241 / 20%);
+  }
+}
+
+/* ---------- Menu ---------- */
+.dining-menu {
+  padding-block: var(--space-24);
+  background: var(--color-surface);
+  scroll-margin-top: var(--space-16);
+}
+
+/* Getting Here shape (components.css .getting-here): centred copy and
+   actions, then one full-width frame at the map's height, holding a photo. */
+.dining-menu__body {
+  max-width: var(--measure-md);
+  margin-inline: auto;
+  text-align: center;
+}
+
+.dining-menu__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-top: var(--space-8);
+}
+
+.dining-menu__media {
+  height: var(--media-h-lg);
+  margin-top: var(--space-12);
+}
+
+/* ---------- Sukha Pool & Sunset Deck ----------
+   Layout is the shared .split-deck (components.css); only the crop is page-specific. */
+.dining-deck .split-deck__media img {
+  object-position: 55% center;
+}
+
+/* ---------- Gallery ---------- */
+.dining-gallery {
+  padding-block: var(--space-24);
+  background: var(--color-surface);
+}
+
+.dining-gallery .empty-state {
+  margin-top: var(--space-6);
+}
+
+/* ---------- Hours + reservation ---------- */
+.dining-hours {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+}
+
+.dining-hours__grid {
+  align-items: start;
+}
+
+.dining-hours__grid .section-head {
+  margin-bottom: 0;
+}

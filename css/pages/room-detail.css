@@ -1,0 +1,278 @@
+/* Room detail template (room-<slug>.html / single-room.php) — section shells only. */
+
+/* ---------- Intro: lead + facts ---------- */
+.room-intro {
+  padding-block: var(--space-24) var(--space-16);
+  background: var(--color-bg);
+}
+
+.room-intro__grid {
+  display: grid;
+  gap: var(--space-12);
+}
+
+.room-intro__lead {
+  max-width: var(--measure-md);
+  margin: var(--space-4) 0 0;
+  font-size: var(--text-h4);
+  line-height: 1.45;
+  color: var(--color-ink);
+}
+
+/* Labels are headings here for the outline; keep the caps-label look. */
+.room-intro .room__details-label,
+.room-story .room__details-label {
+  font-family: var(--font-sans);
+  line-height: 1.4;
+}
+
+.room-intro .room__details-label {
+  margin-bottom: var(--space-4);
+}
+
+/* Facts: label left, serif value right, values in ink so they read first. */
+.room-glance .hours__row dt {
+  flex: 0 0 auto;
+}
+
+.room-glance .hours__row dd {
+  flex: 1 1 8rem;
+  font-size: var(--text-body);
+  color: var(--color-ink);
+}
+
+@media (min-width: 1024px) {
+  .room-intro__grid {
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--space-16);
+    align-items: start;
+  }
+
+  .room-intro__body {
+    grid-column: 1 / 8;
+  }
+
+  .room-intro__facts {
+    grid-column: 8 / -1;
+  }
+}
+
+/* ---------- Photo slider ----------
+   Reuses the home .room-slider track, counter and progress; slides are
+   photo-only, so the caption sits under the frame in the card's place. */
+.room-photos {
+  padding-bottom: var(--space-24);
+  background: var(--color-bg);
+}
+
+.room-photo {
+  margin: 0;
+}
+
+.room-photo__caption {
+  padding-top: var(--space-4);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--color-soft);
+}
+
+.room-photos .empty-state {
+  margin-top: var(--space-6);
+}
+
+/* ---------- Story: photo + copy + amenities ---------- */
+.room-story {
+  padding-block: var(--space-24);
+  background: var(--color-surface);
+}
+
+.room-story__grid {
+  display: grid;
+  gap: var(--space-12);
+}
+
+.room-story__media {
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-sm);
+  overflow: hidden; /* fallback for browsers without overflow: clip */
+  overflow: clip; /* parallax, see components.css Scroll parallax */
+  background: var(--color-line);
+}
+
+.room-story__text {
+  max-width: var(--measure-md);
+  margin: var(--space-6) 0 var(--space-10);
+  font-size: var(--text-body);
+  line-height: var(--line-loose);
+  color: var(--color-muted);
+}
+
+.room-story .room__details-label {
+  padding-top: var(--space-8);
+  margin-bottom: var(--space-6);
+  border-top: 1px solid var(--color-line);
+}
+
+/* One flat list, no bullets; two columns once there is room. */
+.room-amenities__list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3) var(--space-10);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--text-body-sm);
+  line-height: var(--line-snug);
+  color: var(--color-muted);
+}
+
+@media (min-width: 480px) {
+  .room-amenities__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .room-story__grid {
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--space-16);
+    align-items: center;
+  }
+
+  .room-story__media {
+    grid-column: 1 / 7;
+    aspect-ratio: 4 / 5;
+  }
+
+  .room-story__body {
+    grid-column: 7 / -1;
+    padding-left: var(--space-8);
+  }
+}
+
+/* ---------- Other rooms: photo tiles ---------- */
+.other-rooms {
+  padding-block: var(--space-24);
+  background: var(--color-surface);
+}
+
+.room-tiles {
+  display: grid;
+  gap: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .room-tiles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Whole tile is the link; copy sits on a bottom scrim like the page hero. */
+.room-tile {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--color-ink);
+  color: var(--color-inverse);
+}
+
+@media (min-width: 768px) {
+  .room-tile {
+    aspect-ratio: 1 / 1;
+  }
+}
+
+.room-tile img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--dur-zoom) var(--ease-out);
+}
+
+.room-tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgb(0 0 0 / 80%), rgb(0 0 0 / 40%) 45%, transparent 75%);
+}
+
+.room-tile__body {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-8);
+}
+
+@media (min-width: 768px) {
+  .room-tile__body {
+    padding: var(--space-10);
+  }
+}
+
+.room-tile__kicker {
+  font-size: var(--text-caption);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+}
+
+.room-tile__title {
+  font-family: var(--font-serif);
+  font-size: var(--text-h3);
+  font-weight: 300;
+  line-height: var(--line-tight);
+}
+
+.room-tile__tagline {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--text-body);
+}
+
+.room-tile__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  font-size: var(--text-label);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+}
+
+.room-tile__link svg {
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+  transition: transform 200ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .room-tile:hover img {
+    transform: scale(var(--zoom-scale));
+  }
+
+  .room-tile:hover .room-tile__link svg {
+    transform: translateX(3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .room-tile img,
+  .room-tile__link svg {
+    transition: none;
+  }
+
+  .room-tile:hover img,
+  .room-tile:hover .room-tile__link svg {
+    transform: none;
+  }
+}

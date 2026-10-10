@@ -1,0 +1,66 @@
+/* Offers listing (offers.html / archive-offer.php) and offer detail (offer-<slug>.html / single-offer.php) — section shells only. */
+
+/* ---------- Listing: active offers ---------- */
+.offers-list {
+  padding-block: var(--space-24);
+  background: var(--color-surface);
+}
+
+.offers-list .section-head__text {
+  max-width: var(--measure-md);
+}
+
+.offers-list .empty-state {
+  margin-top: var(--space-6);
+}
+
+/* ---------- Listing: how to book ---------- */
+.offers-redeem {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+  scroll-margin-top: var(--space-16);
+}
+
+.offers-redeem__grid {
+  align-items: start;
+}
+
+.offers-redeem__grid .section-head {
+  margin-bottom: 0;
+}
+
+.offers-redeem__steps {
+  max-width: var(--measure-md);
+}
+
+/* ---------- Detail: overview split ---------- */
+.offer-overview {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+}
+
+.offer-overview .card__kicker {
+  margin-bottom: var(--space-3);
+}
+
+/* Panel copy keeps the panel's rhythm rather than the long-form prose measure. */
+.offer-overview__prose {
+  max-width: none;
+}
+
+.offer-overview__prose p {
+  font-size: var(--text-body-sm);
+  line-height: var(--line-loose);
+  color: var(--color-muted);
+}
+
+/* ---------- Detail: other offers ---------- */
+.other-offers {
+  padding-block: var(--space-24);
+  background: var(--color-surface);
+}
+
+/* Portrait photo in a wide card frame: keep the guests in view instead of the empty sky. */
+.card__media--focus-low img {
+  object-position: center 80%;
+}

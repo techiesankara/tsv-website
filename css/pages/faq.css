@@ -1,0 +1,244 @@
+/* FAQ page — section shells only; components live in components.css.
+   Backgrounds: questions + concierge (bg) → cta (surface). */
+
+/* ---------- Topic side menu + questions, concierge below ---------- */
+.faq-page {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+}
+
+.faq-page__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-10);
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .faq-page__layout {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 9fr);
+    gap: var(--space-20);
+  }
+}
+
+/* Topic menu. Phone/tablet: one scrolling row of pills. Desktop: sticky vertical list. */
+.faq-topics {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-width: 0;
+}
+
+.faq-topics__label {
+  font-size: var(--text-caption);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--color-soft);
+}
+
+.faq-topics__list {
+  display: flex;
+  gap: var(--space-2);
+  margin: 0 calc(-1 * var(--gutter));
+  padding: 0 var(--gutter);
+  list-style: none;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.faq-topics__list::-webkit-scrollbar {
+  display: none;
+}
+
+.faq-topics__list li {
+  flex-shrink: 0;
+}
+
+.faq-topics__item {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--control-min);
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  font-size: var(--text-label);
+  font-weight: 600;
+  color: var(--color-soft);
+  white-space: nowrap;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.faq-topics__item:hover {
+  border-color: var(--color-highlight);
+  color: var(--color-highlight-text);
+}
+
+.faq-topics__item.is-active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-inverse);
+}
+
+@media (min-width: 1024px) {
+  .faq-topics {
+    position: sticky;
+    top: calc(var(--space-24) + var(--space-8));
+  }
+
+  .faq-topics__label {
+    padding-bottom: var(--space-4);
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .faq-topics__list {
+    flex-direction: column;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+  }
+
+  /* Text rows with a left rule; the active topic takes the accent rule and ink. */
+  .faq-topics__item {
+    width: 100%;
+    padding: var(--space-3) 0 var(--space-3) var(--space-5);
+    border: 0;
+    border-left: 2px solid var(--color-line);
+    border-radius: 0;
+    font-size: var(--text-body-sm);
+    font-weight: 500;
+    text-align: left;
+    white-space: normal;
+  }
+
+  .faq-topics__item:hover {
+    border-left-color: var(--color-highlight);
+  }
+
+  .faq-topics__item.is-active {
+    background: none;
+    border-left-color: var(--color-accent);
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+}
+
+.faq-page__main {
+  min-width: 0;
+}
+
+.faq-page__groups {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+}
+
+.faq-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  scroll-margin-top: var(--space-24);
+}
+
+.faq-group__head {
+  margin-bottom: var(--space-3);
+}
+
+.faq-group__title {
+  font-size: var(--text-h4);
+  color: var(--color-ink);
+}
+
+.faq-group__intro {
+  margin-top: var(--space-1);
+  font-size: var(--text-body-sm);
+  color: var(--color-soft);
+}
+
+/* Deep links (#faq_page_faq_item_pets) land under the fixed header. */
+.faq-page .accordion__item {
+  scroll-margin-top: var(--space-24);
+}
+
+.faq-page .empty-state {
+  margin-top: var(--space-6);
+}
+
+/* Concierge: full-width card after the questions. Stacks on phones; intro,
+   contact list and actions sit in three columns on desktop. */
+.faq-page__aside {
+  margin-top: var(--space-24);
+}
+
+.faq-page__concierge {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-8);
+  padding: var(--space-8);
+  background: var(--color-card);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+}
+
+@media (min-width: 768px) {
+  .faq-page__concierge {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: var(--space-12);
+  }
+
+  .faq-page__concierge-intro {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 1024px) {
+  .faq-page__concierge {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 4fr) minmax(0, 3fr);
+    gap: var(--space-16);
+    align-items: center;
+  }
+
+  .faq-page__concierge-intro {
+    grid-column: auto;
+  }
+}
+
+.faq-page__concierge-title {
+  font-size: var(--text-h3);
+  color: var(--color-ink);
+}
+
+.faq-page__concierge-text {
+  margin-top: var(--space-4);
+  max-width: 44ch;
+  font-size: var(--text-body-sm);
+  line-height: var(--line-body);
+  color: var(--color-muted);
+}
+
+/* Phone number and email break rather than overflow the narrow card. */
+.faq-page__concierge-hours .hours__row dd {
+  overflow-wrap: anywhere;
+}
+
+.faq-page__concierge-hours .hours__row dd a {
+  transition: color 0.3s;
+}
+
+.faq-page__concierge-hours .hours__row dd a:hover {
+  color: var(--color-highlight-text);
+}
+
+.faq-page__concierge-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-topics__item,
+  .faq-page__concierge-hours .hours__row dd a {
+    transition: none;
+  }
+}

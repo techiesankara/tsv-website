@@ -1,0 +1,187 @@
+/* Blog listing (blog.html / home.php or archive.php) and article detail (article.html / single.php) — section shells only. */
+
+/* ---------- Listing: featured article ---------- */
+.blog-featured {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+}
+
+.blog-featured__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-6);
+  font-size: var(--text-label);
+  font-weight: 600;
+  color: var(--color-highlight-text);
+  transition: color 0.3s;
+}
+
+.blog-featured__link {
+  position: relative;
+}
+
+/* Same 44px hit area as .card__link. */
+.blog-featured__link::after {
+  content: "";
+  position: absolute;
+  inset: calc((var(--control-min) - 100%) / -2) 0;
+}
+
+.blog-featured__link:hover {
+  color: var(--color-ink);
+}
+
+.blog-featured__link svg {
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+  transition: transform 200ms var(--ease-out);
+}
+
+.blog-featured__link:hover svg {
+  transform: translateX(3px);
+}
+
+/* ---------- Listing: filter + grid ---------- */
+.blog-list {
+  padding-block: var(--space-24);
+  background: var(--color-surface);
+  scroll-margin-top: var(--space-16);
+}
+
+.blog-list .section-head__text {
+  max-width: var(--measure-md);
+}
+
+.blog-list .empty-state {
+  margin-top: var(--space-6);
+}
+
+/* Article cards have one destination: title + text + Read link, no button row. */
+.blog-list .card__text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+/* ---------- Article: body ---------- */
+.article-body {
+  padding-block: var(--space-24);
+  background: var(--color-bg);
+}
+
+.article-body__inner {
+  max-width: var(--measure-md);
+  margin-inline: auto;
+}
+
+/* Standfirst: the excerpt repeated as a serif lead before the first paragraph. */
+.article-body__lead {
+  margin-bottom: var(--space-12);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--text-body-lg);
+  line-height: var(--line-body);
+  color: var(--color-ink);
+}
+
+.article-body .prose {
+  max-width: none;
+}
+
+/* Wide figure: the one break from the measure on the page (RHYTHM 2).
+   100% here is the measure column, so the margin goes negative by half the
+   extra width and the figure stays centred on the text. */
+.article-body .prose .figure--wide {
+  --figure-w: min(var(--measure-lg), calc(100vw - 2 * var(--gutter)));
+  width: var(--figure-w);
+  margin-inline: calc((100% - var(--figure-w)) / 2);
+}
+
+.article-body .prose .figure--wide img {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+@media (max-width: 1023px) {
+  .article-body .prose .figure--wide {
+    width: 100%;
+    margin-inline: 0;
+  }
+}
+
+/* ---------- Article: tags + share ---------- */
+.article-foot {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  max-width: var(--measure-md);
+  margin-inline: auto;
+  margin-top: var(--space-16);
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--color-line);
+}
+
+@media (min-width: 768px) {
+  .article-foot {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+}
+
+.article-foot__label {
+  display: block;
+  margin-bottom: var(--space-3);
+  font-size: var(--text-caption);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--color-soft);
+}
+
+.article-foot__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.article-foot__share {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.article-foot__share .button {
+  gap: var(--space-2);
+  min-height: var(--control-min);
+  padding-block: var(--space-2);
+}
+
+.article-foot__share .button svg {
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+}
+
+/* Copy-link feedback: replaces the label text, no toast. */
+.article-foot__status {
+  display: block;
+  min-height: 1.5em;
+  margin-top: var(--space-2);
+  font-size: var(--text-caption);
+  color: var(--color-success);
+}
+
+/* ---------- Article: related ---------- */
+.article-related {
+  padding-block: var(--space-24);
+  background: var(--color-surface);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blog-featured__link,
+  .blog-featured__link svg {
+    transition: none;
+  }
+}

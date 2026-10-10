@@ -1,0 +1,49 @@
+/* Experiences page — section shells only; components live in components.css. */
+
+/* ---------- Intro + filter + list ---------- */
+.experiences-list {
+  padding-block: var(--space-24);
+  background: var(--color-surface);
+}
+
+.experiences-list .section-head__text {
+  max-width: var(--measure-md);
+}
+
+/* Categories hold one to three cards: centre the row so a lone card sits
+   under the centred head instead of in the left column. */
+@media (min-width: 640px) {
+  .experiences-list .card-grid {
+    grid-template-columns: repeat(auto-fit, calc((100% - var(--space-6)) / 2));
+    justify-content: center;
+  }
+}
+
+@media (min-width: 1024px) {
+  .experiences-list .card-grid {
+    grid-template-columns: repeat(auto-fit, calc((100% - 2 * var(--space-6)) / 3));
+  }
+}
+
+.experiences-list .empty-state {
+  margin-top: var(--space-6);
+}
+
+/* Rows of cards need more air than the column gutter: the next photo
+   otherwise sits right under the previous card's "View experience" link. */
+.experiences-list .card-grid {
+  row-gap: var(--space-16);
+}
+
+/* Card descriptions share one height: exactly three lines (clamped when
+   longer, reserved when shorter, 1.7 = .card__text line-height), the rest
+   lives on the detail page. Also used by the detail pages' Other Experiences cards. */
+.experiences-list .card__text,
+.experience-others .card__text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  min-height: calc(1.7em * 3);
+  overflow: hidden;
+}
